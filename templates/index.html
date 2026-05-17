@@ -59,8 +59,8 @@
         }
 
         /* ── ENCABEZADO ── */
-        header { margin-bottom: 2.5rem; text-align: center; }
-        .logo-line { display: flex; align-items: baseline; justify-content: center; gap: 0.75rem; margin-bottom: 0.4rem; }
+        header { margin-bottom: 3rem; }
+        .logo-line { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.4rem; }
 
         .logo {
             font-family: 'Cormorant Garamond', serif;
@@ -82,7 +82,32 @@
         }
 
         .tagline { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); font-weight: 300; }
-        .divider  { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--wine) 50%, transparent 100%); margin-top: 1.5rem; }
+        .divider  { width: 100%; height: 1px; background: linear-gradient(90deg, var(--wine) 0%, transparent 100%); margin-top: 1.8rem; }
+
+        /* ── SECCIÓN DE LOGIN ── */
+        .auth-container { max-width: 420px; margin: 2rem auto; width: 100%; }
+        .auth-title { font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--wine-light); text-align: center; margin-bottom: 2rem; font-weight: 400; }
+        .form-group { margin-bottom: 1.2rem; }
+        .auth-input { width: 100%; padding: 1rem 1.2rem; background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 2px; color: var(--cream); font-family: 'DM Mono', monospace; font-size: 0.75rem; transition: border-color 0.2s; }
+        .auth-input:focus { outline: none; border-color: var(--wine-light); background: rgba(0,0,0,0.4); }
+        .auth-buttons { display: flex; gap: 1rem; margin-top: 1.8rem; }
+        .btn-auth { flex: 1; padding: 0.9rem; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+        .btn-login { background: var(--wine); color: var(--cream); border: none; }
+        .btn-login:hover { background: var(--wine-mid); box-shadow: 0 4px 16px rgba(107,26,42,0.3); }
+        .btn-register { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+        .btn-register:hover { border-color: var(--wine-light); color: var(--cream); }
+        .auth-message { font-size: 0.65rem; text-align: center; margin-top: 1rem; letter-spacing: 0.05em; min-height: 1.2em; }
+        .auth-message.error { color: var(--red); }
+        .auth-message.success { color: var(--green); }
+
+        /* ── APLICACIÓN PRINCIPAL (OCULTA POR DEFECTO) ── */
+        #mainApp { display: none; }
+        #mainApp.visible { display: block; }
+        
+        /* ── INSTRUCCIONES VINOTINTO ── */
+        .inst-box { background: rgba(61, 10, 22, 0.4); border: 1px solid rgba(184, 64, 96, 0.3); border-radius: 2px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; }
+        .inst-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--cream); letter-spacing: 0.08em; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .inst-text { font-size: 0.62rem; color: var(--cream-dim); line-height: 1.5; letter-spacing: 0.05em; }
 
         /* ── TARJETA ── */
         .card {
@@ -92,84 +117,15 @@
             padding: 2rem;
             backdrop-filter: blur(8px);
             margin-bottom: 1.5rem;
-            animation: fadeUp 0.5s ease both;
         }
 
-        .section-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--wine-light); margin-bottom: 1.2rem; }
-
-        /* ── INSTRUCCIONES GPS ── */
-        .instruction-box {
-            background: rgba(107, 26, 42, 0.05);
-            border-left: 2px solid var(--wine-light);
-            padding: 1rem 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-        .instruction-box p { font-size: 0.65rem; color: var(--cream-dim); line-height: 1.5; margin-bottom: 0.5rem; }
-        .instruction-box ul { list-style: none; padding-left: 0.2rem; }
-        .instruction-box li { font-size: 0.6rem; color: var(--muted); margin-bottom: 0.4rem; display: flex; gap: 0.5rem; }
-        .instruction-box li::before { content: "»"; color: var(--wine-light); }
-
-        /* ── CONTROL DE SESIÓN SUPERIOR (ZONA DE TRABAJO ACTIVE) ── */
-        .top-session-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.65rem;
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px dashed rgba(107, 26, 42, 0.2);
-        }
-
-        /* ── FORMULARIO DE ACCESO (PANTALLA BIENVENIDA) ── */
-        .auth-container { max-width: 400px; margin: 0 auto; }
-        .auth-container input {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--border);
-            padding: 0.75rem;
-            color: var(--cream);
-            font-family: 'DM Mono', monospace;
-            font-size: 0.68rem;
-            border-radius: 2px;
-            width: 100%;
-            margin-bottom: 0.8rem;
-            transition: border-color 0.2s;
-        }
-        .auth-container input:focus { border-color: var(--wine-light); outline: none; }
-        .auth-btn-group { display: flex; gap: 0.8rem; margin-top: 0.4rem; }
-        .btn-auth {
-            flex: 1;
-            padding: 0.75rem;
-            font-size: 0.62rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 2px;
-            font-family: 'DM Mono', monospace;
-            transition: background 0.2s, color 0.2s;
-        }
-        .btn-login { background: var(--wine); color: var(--cream); border: none; }
-        .btn-login:hover { background: var(--wine-mid); }
-        .btn-register { background: transparent; color: var(--muted); border: 1px solid var(--border); }
-        .btn-register:hover { color: var(--cream); border-color: var(--wine-mid); }
-        
-        .btn-logout {
-            background: transparent;
-            border: none;
-            color: var(--red);
-            cursor: pointer;
-            font-family: 'DM Mono', monospace;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            opacity: 0.7;
-        }
-        .btn-logout:hover { opacity: 1; }
+        .section-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--wine-light); margin-bottom: 1rem; }
 
         /* ── DROP ZONE ── */
         .drop-zone {
             border: 1px dashed var(--border);
             border-radius: 2px;
-            padding: 2.5rem 1.5rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             cursor: pointer;
             transition: border-color 0.25s, background 0.25s;
@@ -213,6 +169,7 @@
         }
         .btn-detect:hover:not(:disabled) { background: var(--wine-mid); box-shadow: 0 4px 24px rgba(107,26,42,0.45); transform: translateY(-1px); }
         .btn-detect:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-detect::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); transform: translateX(-100%); }
         .btn-detect.loading::after { animation: shimmer 1.2s infinite; }
 
         /* ── RESULTADOS ── */
@@ -301,7 +258,7 @@
         #map:hover { filter: saturate(0.9) brightness(1); }
         .map-section.expanded #map { height: 520px; }
 
-        /* Leaflet popup style */
+        /* Leaflet popup */
         .leaflet-popup-content-wrapper {
             background: #1A0A0E !important;
             border: 1px solid rgba(107,26,42,0.5) !important;
@@ -320,11 +277,27 @@
         .popup-val      { text-align: right; }
         .popup-conf     { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.6rem; }
         .popup-coords   { margin-top: 0.6rem; font-size: 0.58rem; color: var(--muted); letter-spacing: 0.06em; }
+        .popup-thumbnail { width: 100%; max-width: 180px; height: auto; border: 1px solid var(--border); border-radius: 2px; margin: 0.5rem auto 0.2rem; display: block; }
 
         .no-gps-notice  { padding: 1rem 1.2rem; border: 1px dashed var(--border); border-radius: 2px; font-size: 0.65rem; color: var(--muted); text-align: center; letter-spacing: 0.08em; }
         .error-msg      { font-size: 0.7rem; color: var(--red); padding: 1rem; border: 1px solid rgba(192,57,43,0.3); border-radius: 2px; background: rgba(192,57,43,0.05); }
 
-        footer { margin-top: 3.5rem; text-align: center; font-size: 0.58rem; letter-spacing: 0.18em; color: rgba(156,138,143,0.3); text-transform: uppercase; }
+        /* ── HISTORIAL ── */
+        .hist-row    { display: flex; gap: 1rem; align-items: center; justify-content: space-between; }
+        .hist-count  { font-size: 0.65rem; color: var(--muted); }
+        .hist-count span { color: var(--cream-dim); }
+
+        .btn-hist { padding: 0.5rem 1rem; border-radius: 2px; font-family: 'DM Mono', monospace; font-size: 0.6 flex; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+        .btn-hist-map { background: var(--wine); color: var(--cream); border: none; }
+        .btn-hist-map:hover { background: var(--wine-mid); }
+        .btn-hist-del { background: transparent; color: var(--red); border: 1px solid var(--red); }
+        .btn-hist-del:hover { background: rgba(192,57,43,0.1); }
+
+        /* ── BOTÓN CERRAR SESIÓN ── */
+        .btn-logout { background: transparent; border: 1px solid rgba(184, 64, 96, 0.4); color: var(--wine-light); padding: 0.4rem 0.8rem; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; font-family: 'DM Mono', monospace; cursor: pointer; border-radius: 2px; transition: all 0.2s; }
+        .btn-logout:hover { background: rgba(107, 26, 42, 0.2); color: var(--cream); }
+
+        footer { margin-top: 2.5rem; text-align: center; font-size: 0.58rem; letter-spacing: 0.18em; color: rgba(156,138,143,0.3); text-transform: uppercase; }
 
         @keyframes fadeUp  { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse   { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
@@ -336,41 +309,48 @@
 <div class="wrapper">
 
     <header>
-        <div class="logo-line">
-            <span class="logo">ICTINO</span>
-            <span class="logo-accent"></span>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+            <div>
+                <div class="logo-line">
+                    <span class="logo">ICTINO</span>
+                    <span class="logo-accent"></span>
+                </div>
+                <p class="tagline">Detector de Huecos — Sistema de Análisis Visual</p>
+            </div>
+            <button id="logoutBtn" class="btn-logout" style="display: none;" onclick="cerrarSesion()">Salir</button>
         </div>
-        <p class="tagline">Detector de Huecos — Sistema de Análisis Visual</p>
         <div class="divider"></div>
     </header>
 
-    <div class="card" id="authCard">
-        <p class="section-label" style="text-align: center;">Acceso al Sistema</p>
-        <div id="authBox" class="auth-container">
-            <input type="text" id="authUsername" placeholder="Nombre de usuario">
-            <input type="password" id="authPassword" placeholder="Contraseña">
-            <div class="auth-btn-group">
-                <button class="btn-auth btn-login" onclick="handleLogin()">Iniciar Sesión</button>
-                <button class="btn-auth btn-register" onclick="handleRegister()">Registrarse</button>
-            </div>
-            <p id="authMessage" style="font-size:0.6rem; text-align:center; margin-top:0.8rem; min-height: 1em;"></p>
+    <div id="authBlock" class="card auth-container">
+        <h2 class="auth-title">Acceso al Sistema</h2>
+        <div class="form-group">
+            <input type="text" id="username" class="auth-input" placeholder="Usuario" autocomplete="off">
         </div>
+        <div class="form-group">
+            <input type="password" id="password" class="auth-input" placeholder="Contraseña">
+        </div>
+        <div class="auth-buttons">
+            <button class="btn-auth btn-login" onclick="ejecutarAuth('/login')">Iniciar Sesión</button>
+            <button class="btn-auth btn-register" onclick="ejecutarAuth('/register')">Registrarse</button>
+        </div>
+        <div id="authMessage" class="auth-message"></div>
     </div>
 
-    <div id="workspaceZone" style="display: none;">
+    <div id="mainApp">
         
-        <div class="top-session-bar">
-            <span>Operador activo: <strong id="currentSessionUser" style="color: var(--wine-light)"></strong></span>
-            <button class="btn-logout" onclick="handleLogout()">Terminar Sesión</button>
-        </div>
-
-        <div class="instruction-box">
-            <p><strong>💡 Nota de Georreferenciación:</strong> Para mapear con precisión la ubicación de los daños viales detectados, asegúrate de configurar tu dispositivo móvil de la siguiente manera antes de tomar la fotografía:</p>
-            <ul>
-                <li>Enciende la <strong>Ubicación/GPS</strong> global en la barra de tareas de tu teléfono.</li>
-                <li>Abre los ajustes de tu app de Cámara y activa la opción de <strong>Etiquetas geográficas</strong> o <strong>Guardar ubicación</strong>.</li>
-                <li>Si usas esta plataforma web móvil, concede los permisos de ubicación si el navegador web te lo solicita.</li>
-            </ul>
+        <div class="inst-box">
+            <h3 class="inst-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom:-1px;">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                Instrucciones de Georreferenciación
+            </h3>
+            <p class="inst-text">
+                Para proyectar los daños viales sobre la cartografía digital, capture imágenes con los servicios de localización (GPS) activos en su dispositivo móvil. El sistema extraerá los metadatos de posicionamiento de manera automática durante la fase de análisis visual.
+            </p>
         </div>
 
         <div class="card">
@@ -419,7 +399,7 @@
             </div>
 
             <div class="panel-label">
-                <span class="section-label" style="margin:0">Visualización de IA</span>
+                <span class="section-label" style="margin:0">Visualización</span>
             </div>
             <div class="canvas-wrap">
                 <canvas id="detectionCanvas"></canvas>
@@ -428,7 +408,7 @@
             <div class="det-list" id="detList"></div>
 
             <div class="action-row" id="actionRow">
-                <button class="btn-action btn-save" id="saveBtn" onclick="guardarRegistro()">Guardar análisis</button>
+                <button class="btn-action btn-save" id="saveBtn" onclick="guardarRegistro()">Guardar registro</button>
                 <button class="btn-action btn-map-expand" onclick="verEnMapa()">Ver en mapa</button>
             </div>
 
@@ -442,12 +422,21 @@
             <div id="mapContainer"></div>
         </div>
 
-    </div>
+        <div class="card" style="margin-top:1.5rem">
+            <p class="section-label">Historial de detecciones</p>
+            <div class="hist-row">
+                <div class="hist-count"><span id="totalRegistros">0</span> registros guardados</div>
+                <div style="display:flex;gap:0.6rem">
+                    <button class="btn-hist btn-hist-map" onclick="verHistorial()">Ver en mapa</button>
+                    <button class="btn-hist btn-hist-del" onclick="borrarHistorial()">Borrar todo</button>
+                </div>
+            </div>
+        </div>
 
-    <footer>
-        ICTINO &nbsp;·&nbsp; Análisis de Imagen &nbsp;·&nbsp; v1.3
+    </div> <footer>
+        ICTINO &nbsp;·&nbsp; Análisis de Imagen &nbsp;·&nbsp; v1.1
         <span style="margin:0 0.6rem;opacity:0.3">|</span>
-        <span style="font-size:0.55rem;letter-spacing:0.12em;opacity:0.5">Hecho por MD</span>
+        <span style="font-size:0.55rem;letter-spacing:0.12em;opacity:0.5">Hecho por "MD"</span>
     </footer>
 
 </div>
@@ -456,9 +445,85 @@
 <script src="https://cdn.jsdelivr.net/npm/exifr/dist/full.umd.js"></script>
 
 <script>
-    const API_BASE_URL = "https://ictino-backend.onrender.com";
+    // ── CONFIGURACIÓN DE RUTAS AUTENTICACIÓN ────────────────────────
+    let currentUserId = null;
 
-    // ── REFERENCIAS DOM ────────────────────────────────────────────
+    async function ejecutarAuth(endpoint) {
+        const userInp = document.getElementById('username').value.trim();
+        const passInp = document.getElementById('password').value.trim();
+        const msgDiv  = document.getElementById('authMessage');
+
+        if (!userInp || !passInp) {
+            msgDiv.className = "auth-message error";
+            msgDiv.textContent = "Por favor ingresa usuario y contraseña.";
+            return;
+        }
+
+        msgDiv.className = "auth-message";
+        msgDiv.textContent = "Procesando...";
+
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: userInp, password: passInp })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok || data.error) {
+                msgDiv.className = "auth-message error";
+                msgDiv.textContent = data.error || `Error en servidor (${response.status})`;
+                return;
+            }
+
+            if (endpoint === '/register') {
+                msgDiv.className = "auth-message success";
+                msgDiv.textContent = "Registro exitoso. ¡Ya puedes iniciar sesión arriba!";
+                document.getElementById('password').value = "";
+            } else if (endpoint === '/login') {
+                currentUserId = data.user_id;
+                localStorage.setItem('ictino_user_id', currentUserId);
+                localStorage.setItem('ictino_username', userInp);
+                
+                msgDiv.textContent = "";
+                verificarSesion();
+            }
+        } catch (err) {
+            msgDiv.className = "auth-message error";
+            msgDiv.textContent = "Error de red o JSON inválido en el servidor.";
+            console.error(err);
+        }
+    }
+
+    function verificarSesion() {
+        const guardadoId = localStorage.getItem('ictino_user_id');
+        if (guardadoId) {
+            currentUserId = guardadoId;
+            document.getElementById('authBlock').style.display = 'none';
+            document.getElementById('mainApp').classList.add('visible');
+            document.getElementById('logoutBtn').style.display = 'block';
+            actualizarContadorHistorial();
+        } else {
+            document.getElementById('authBlock').style.display = 'block';
+            document.getElementById('mainApp').classList.remove('visible');
+            document.getElementById('logoutBtn').style.display = 'none';
+        }
+    }
+
+    function cerrarSesion() {
+        localStorage.removeItem('ictino_user_id');
+        localStorage.removeItem('ictino_username');
+        currentUserId = null;
+        location.reload();
+    }
+
+    function actualizarContadorHistorial() {
+        const historial = JSON.parse(localStorage.getItem('ictino_historial') || '[]');
+        document.getElementById('totalRegistros').textContent = historial.length;
+    }
+
+    // ── REFERENCIAS DOM APLICACIÓN ──────────────────────────────────
     const imageInput     = document.getElementById('imageInput');
     const fileName       = document.getElementById('fileName');
     const detectBtn      = document.getElementById('detectBtn');
@@ -468,89 +533,12 @@
     const gpsBadge       = document.getElementById('gpsBadge');
     const gpsBadgeText   = document.getElementById('gpsBadgeText');
 
-    // Paneles de control condicionales
-    const authCard       = document.getElementById('authCard');
-    const workspaceZone  = document.getElementById('workspaceZone');
-    const currentSessionUser = document.getElementById('currentSessionUser');
-    const authMessage        = document.getElementById('authMessage');
-
-    // ── ESTADO ────────────────────────────────────────────────────
-    let loadedImage         = null;   
-    let currentImageDataURL  = null;  
-    let gpsCoords           = null;   
-    let leafletMap          = null;
-    let lastDetections      = [];
-    let currentUser         = null;   
-
-    // ── GESTIÓN DE AUTENTICACIÓN ──────────────────────────────────
-    async function handleLogin() {
-        const username = document.getElementById('authUsername').value.trim();
-        const password = document.getElementById('authPassword').value.trim();
-        if(!username || !password) return showAuthMsg("Ingresa credenciales", "var(--red)");
-
-        try {
-            const response = await fetch(`${API_BASE_URL}/login`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password })
-            });
-            const data = await response.json();
-            if(!response.ok) throw new Error(data.error || "Error de login");
-
-            currentUser = data.user;
-            localStorage.setItem('ictino_user', JSON.stringify(currentUser));
-            updateAuthUI();
-            fetchServerHistory();
-        } catch(err) {
-            showAuthMsg(err.message, "var(--red)");
-        }
-    }
-
-    async function handleRegister() {
-        const username = document.getElementById('authUsername').value.trim();
-        const password = document.getElementById('authPassword').value.trim();
-        if(!username || !password) return showAuthMsg("Ingresa datos válidos", "var(--red)");
-
-        try {
-            const response = await fetch(`${API_BASE_URL}/register`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password, role: "user" })
-            });
-            const data = await response.json();
-            if(!response.ok) throw new Error(data.error || "Error de registro");
-
-            showAuthMsg("Registrado con éxito. ¡Ya puedes iniciar sesión!", "var(--green)");
-        } catch(err) {
-            showAuthMsg(err.message, "var(--red)");
-        }
-    }
-
-    function handleLogout() {
-        currentUser = null;
-        localStorage.removeItem('ictino_user');
-        localStorage.removeItem('ictino_server_history');
-        updateAuthUI();
-        location.reload();
-    }
-
-    function updateAuthUI() {
-        if(currentUser) {
-            authCard.style.display = 'none';
-            workspaceZone.style.display = 'block';
-            currentSessionUser.textContent = currentUser.username;
-            if(imageInput.files.length) detectBtn.disabled = false;
-        } else {
-            authCard.style.display = 'block';
-            workspaceZone.style.display = 'none';
-            detectBtn.disabled = true;
-        }
-    }
-
-    function showAuthMsg(msg, color) {
-        authMessage.textContent = msg;
-        authMessage.style.color = color;
-    }
+    // ── ESTADO DE LA APLICACIÓN ─────────────────────────────────────
+    let loadedImage        = null;   
+    let currentImageDataURL = null;  
+    let gpsCoords          = null;   
+    let leafletMap         = null;
+    let lastDetections     = [];
 
     // ── SELECCIÓN DE ARCHIVO ──────────────────────────────────────
     imageInput.addEventListener('change', async () => {
@@ -558,7 +546,7 @@
         if (!file) return;
 
         fileName.textContent = file.name;
-        if(currentUser) detectBtn.disabled = false;
+        detectBtn.disabled = false;
 
         const reader = new FileReader();
         reader.onload = e => {
@@ -575,7 +563,6 @@
         showGPSBadge(gpsCoords);
     });
 
-    // Drag & Drop
     dropZone.addEventListener('dragover',  e => { e.preventDefault(); dropZone.classList.add('dragover'); });
     dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
     dropZone.addEventListener('drop', e => {
@@ -590,7 +577,7 @@
         }
     });
 
-    // ── GPS EXIF ──────────────────────────────────────────────────
+    // ── EXTRACCIÓN GPS EXIF ─────────────────────────────────────────
     async function extractGPS(file) {
         try {
             const gps = await exifr.gps(file);
@@ -599,10 +586,6 @@
         } catch (_) {}
         return null;
     }
-
-    const style = document.createElement('style');
-    style.innerHTML = `@keyframes markerPulse{0%,100%{box-shadow:0 0 0 4px rgba(184,64,96,0.3),0 0 16px rgba(184,64,96,0.5);}50%{box-shadow:0 0 0 8px rgba(184,64,96,0.1),0 0 24px rgba(184,64,96,0.7);}}`;
-    document.head.appendChild(style);
 
     function showGPSBadge(coords) {
         gpsBadge.classList.add('visible');
@@ -626,7 +609,6 @@
         return '#c0392b';                  
     }
 
-    // Dibuja en base al tamaño del contenedor
     function drawDetections(img, detections) {
         const canvas = document.getElementById('detectionCanvas');
         const ctx    = canvas.getContext('2d');
@@ -655,12 +637,41 @@
             const tw    = ctx.measureText(label).width;
             const lh    = fSize + 8;
 
-            ctx.fillStyle = c >= 0.6 ? 'rgba(106,173,106,0.88)' : c >= 0.35 ? 'rgba(107,26,42,0.88)' : 'rgba(192,57,43,0.88)';
+            ctx.fillStyle = c >= 0.6
+                ? 'rgba(106,173,106,0.88)'
+                : c >= 0.35
+                    ? 'rgba(107,26,42,0.88)'
+                    : 'rgba(192,57,43,0.88)';
             ctx.fillRect(x1, y1 - lh, tw + 12, lh);
 
             ctx.fillStyle = '#F5EFE8';
             ctx.fillText(label, x1 + 6, y1 - 5);
         });
+    }
+
+    function crearMiniatura(imageData, bbox, maxWidth = 120) {
+        return new Promise(resolve => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const ctx    = canvas.getContext('2d');
+                const [x1, y1, x2, y2] = bbox;
+                const w = x2 - x1, h = y2 - y1;
+                canvas.width  = w;
+                canvas.height = h;
+                ctx.drawImage(img, x1, y1, w, h, 0, 0, w, h);
+                resolve(canvas.toDataURL('image/jpeg', 0.75));
+            };
+            img.onerror = () => resolve(null);
+            img.src = imageData;
+        });
+    }
+
+    // ── RENDERIZADO DE TARJETAS ─────────────────────────────────────
+    function confClass(c) {
+        if (c >= 0.6)  return 'conf-high';
+        if (c >= 0.35) return 'conf-mid';
+        return 'conf-low';
     }
 
     function renderCards(detections) {
@@ -687,12 +698,6 @@
         });
     }
 
-    function confClass(c) {
-        if (c >= 0.6)  return 'conf-high';
-        if (c >= 0.35) return 'conf-mid';
-        return 'conf-low';
-    }
-
     function updateStats(detections) {
         const n = detections.length;
         document.getElementById('statCount').textContent = n;
@@ -706,9 +711,9 @@
         document.getElementById('statAvgConf').textContent = `${(confs.reduce((a, b) => a + b, 0) / confs.length * 100).toFixed(1)}%`;
     }
 
-    // ── PROCESAMIENTO EN PRODUCCIÓN ───────────────────────────────
+    // ── PROCESAMIENTO E INTERACCIÓN CON BACKEND ─────────────────────
     async function upload() {
-        if (!imageInput.files.length || !currentUser) return;
+        if (!imageInput.files.length) return;
 
         detectBtn.disabled = true;
         detectBtn.classList.add('loading');
@@ -719,9 +724,13 @@
         try {
             const formData = new FormData();
             formData.append('image', imageInput.files[0]);
-            formData.append('user_id', currentUser.id); 
+            
+            // Añadimos el user_id activo a la petición de análisis
+            if (currentUserId) {
+                formData.append('user_id', currentUserId);
+            }
 
-            const response = await fetch(`${API_BASE_URL}/detect`, { method: 'POST', body: formData });
+            const response = await fetch('/detect', { method: 'POST', body: formData });
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
             const data = await response.json();
@@ -742,17 +751,16 @@
             const actionRow = document.getElementById('actionRow');
             actionRow.classList.add('visible');
             const saveBtn = document.getElementById('saveBtn');
-            saveBtn.textContent = 'Guardar análisis';
+            saveBtn.textContent = 'Guardar registro';
             saveBtn.disabled    = false;
             saveBtn.className   = 'btn-action btn-save';
-
-            fetchServerHistory();
 
         } catch (err) {
             resultsSection.classList.add('visible');
             document.getElementById('detList').innerHTML =
                 `<div class="error-msg">Error al conectar con el servidor: ${err.message}</div>`;
-            ['statCount', 'statMaxConf', 'statAvgConf'].forEach(id => document.getElementById(id).textContent = '—');
+            ['statCount', 'statMaxConf', 'statAvgConf'].forEach(id =>
+                document.getElementById(id).textContent = '—');
         } finally {
             detectBtn.disabled  = false;
             detectBtn.classList.remove('loading');
@@ -760,36 +768,66 @@
         }
     }
 
-    function guardarRegistro() {
+    // ── MANEJO DE HISTORIAL LOCAL ───────────────────────────────────
+    async function guardarRegistro() {
         if (!lastDetections.length) return;
+
         const saveBtn = document.getElementById('saveBtn');
         saveBtn.disabled    = true;
-        saveBtn.textContent = 'Guardado en la Nube ✓';
-        saveBtn.className   = 'btn-action btn-save saved';
-    }
+        saveBtn.textContent = 'Guardando...';
 
-    async function fetchServerHistory() {
-        if(!currentUser) return;
-        try {
-            const response = await fetch(`${API_BASE_URL}/history?user_id=${currentUser.id}`);
-            if(!response.ok) throw new Error("No se pudo obtener el historial");
-            const data = await response.json();
-            
-            if(data.success) {
-                localStorage.setItem('ictino_server_history', JSON.stringify(data.history));
-            }
-        } catch(err) {
-            console.error("Error sincronizando historial silencioso: ", err);
+        let thumbnail = null;
+        if (currentImageDataURL && lastDetections.length) {
+            const principal = lastDetections.reduce((max, d) => d.confidence > max.confidence ? d : max, lastDetections[0]);
+            thumbnail = await crearMiniatura(currentImageDataURL, principal.box).catch(() => null);
         }
+
+        const historial = JSON.parse(localStorage.getItem('ictino_historial') || '[]');
+        const registro  = {
+            id:          Date.now(),
+            user_id:     currentUserId,
+            fecha:       new Date().toLocaleString('es-ES'),
+            gps:         gpsCoords,
+            detecciones: lastDetections,
+            maxConf:     Math.max(...lastDetections.map(d => d.confidence)),
+            thumbnail:   thumbnail   
+        };
+        historial.push(registro);
+
+        try {
+            localStorage.setItem('ictino_historial', JSON.stringify(historial));
+        } catch {
+            const reducido = historial.slice(-15).map(r => ({ ...r, thumbnail: null }));
+            localStorage.setItem('ictino_historial', JSON.stringify(reducido));
+        }
+
+        actualizarContadorHistorial();
+        saveBtn.className   = 'btn-action btn-save saved';
+        saveBtn.textContent = 'Guardado ✓';
     }
 
-    // ── MAPA LEAFLET EN PRODUCCIÓN ────────────────────────────────
     function verEnMapa() {
         renderMap(gpsCoords, lastDetections);
         mapSection.classList.add('expanded');
         mapSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    function verHistorial() {
+        if (!leafletMap) renderMap(null, []);   
+        cargarHistorialEnMapa();
+        mapSection.classList.add('visible', 'expanded');
+        mapSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function borrarHistorial() {
+        if (confirm('¿Borrar todo el historial guardado?')) {
+            localStorage.removeItem('ictino_historial');
+            actualizarContadorHistorial();
+            location.reload();
+        }
+    }
+
+    // ── GESTIÓN DE MAPAS CON LEAFLET ────────────────────────────────
     function renderMap(coords, detections) {
         const container = document.getElementById('mapContainer');
         mapSection.classList.add('visible');
@@ -797,21 +835,24 @@
         if (!coords) {
             container.innerHTML = `
                 <div class="no-gps-notice">
-                    Esta imagen no contiene datos GPS válidos en su metadata EXIF.<br>
+                    Esta imagen no contiene datos GPS en su metadata EXIF.<br>
                     <span style="font-size:0.6rem;opacity:0.6;margin-top:0.4rem;display:block">
-                        Por favor revisa el recuadro de instrucciones arriba para activar la georreferenciación de tu cámara.
+                        Toma la foto con GPS activo en tu dispositivo para ver la ubicación aquí.
                     </span>
                 </div>`;
             document.getElementById('coordsLabel').textContent = '';
             return;
         }
 
-        document.getElementById('coordsLabel').textContent = `${coords.lat.toFixed(5)}, ${coords.lng.toFixed(5)}`;
-        container.innerHTML = '<div id="map"></div>';
+        document.getElementById('coordsLabel').textContent =
+            `${coords.lat.toFixed(5)}, ${coords.lng.toFixed(5)}`;
 
         if (leafletMap) { leafletMap.remove(); leafletMap = null; }
-        leafletMap = L.map('map', { zoomControl: true }).setView([coords.lat, coords.lng], 17);
-        
+
+        container.innerHTML = '<div id="map"></div>';
+
+        leafletMap = L.map('map', { zoomControl: true }).setView([coords.lat, coords.lng], 18);
+
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '© OpenStreetMap © CARTO',
             maxZoom: 20,
@@ -822,7 +863,8 @@
             className: '',
             html: `<div style="width:18px;height:18px;background:#B84060;border:2.5px solid #F5EFE8;border-radius:50%;
                    box-shadow:0 0 0 4px rgba(184,64,96,0.3),0 0 16px rgba(184,64,96,0.5);
-                   animation:markerPulse 2s ease-in-out infinite;"></div>`,
+                   animation:markerPulse 2s ease-in-out infinite;"></div>
+                   <style>@keyframes markerPulse{0%,100%{box-shadow:0 0 0 4px rgba(184,64,96,0.3),0 0 16px rgba(184,64,96,0.5);}50%{box-shadow:0 0 0 8px rgba(184,64,96,0.1),0 0 24px rgba(184,64,96,0.7);}}</style>`,
             iconSize: [18, 18], iconAnchor: [9, 9], popupAnchor: [0, -14]
         });
 
@@ -832,63 +874,92 @@
             marker.bindPopup(buildPopupHTML(detections, coords), { maxWidth: 260, minWidth: 220 }).openPopup();
         }
 
-        cargarPuntosAnterioresSilencioso();
+        cargarHistorialEnMapa();
     }
 
-    // Carga los análisis del historial directo al mapa de fondo para enriquecer la vista de forma transparente
-    function cargarPuntosAnterioresSilencioso() {
-        const historial = JSON.parse(localStorage.getItem('ictino_server_history') || '[]');
+    function cargarHistorialEnMapa() {
+        const historial = JSON.parse(localStorage.getItem('ictino_historial') || '[]');
         if (!leafletMap || !historial.length) return;
 
-        historial.forEach((reg) => {
-            // Genera una pequeña dispersión visual para el mapa de Popayán en caso de datos de prueba
-            let lat = 2.4411 + (Math.random() - 0.5) * 0.008; 
-            let lng = -76.6061 + (Math.random() - 0.5) * 0.008;
+        const group = L.featureGroup();
 
-            L.circleMarker([lat, lng], {
-                radius: 5,
-                fillColor:   '#6aad6a',
+        historial.forEach((reg, i) => {
+            if (!reg.gps) return;
+            // Filtrar opcionalmente por usuario
+            if (reg.user_id && reg.user_id !== currentUserId) return;
+
+            const marker = L.circleMarker([reg.gps.lat, reg.gps.lng], {
+                radius: 8,
+                fillColor:   i === historial.length - 1 ? '#B84060' : '#6aad6a',
                 color:       '#fff',
-                weight:      1,
-                opacity:     0.7,
-                fillOpacity: 0.5
-            }).addTo(leafletMap).bindPopup(`
-                <div style="font-size:0.62rem; font-family:'DM Mono', monospace;">
-                    <strong style="color:var(--wine-light)">Análisis Previo</strong><br>
-                    Fecha: ${reg.date}<br>
-                    Huecos: ${reg.results ? reg.results.length : 0}
-                </div>
-            `);
+                weight:      2,
+                opacity:     0.8,
+                fillOpacity: 0.6
+            });
+            marker.bindPopup(buildHistorialPopupHTML(reg, i), { maxWidth: 280 });
+            group.addLayer(marker);
         });
+
+        group.addTo(leafletMap);
+        if (group.getLayers().length > 0)
+            leafletMap.fitBounds(group.getBounds().pad(0.1));
     }
 
     function buildPopupHTML(detections, coords) {
         const maxConf = Math.max(...detections.map(d => d.confidence));
         const rows = detections.map((det, i) => {
+            const c = det.confidence;
+            const [x1, y1, x2, y2] = det.box.map(v => Math.round(v));
             return `
             <div class="popup-row">
                 <span class="popup-key">Hueco #${i + 1}</span>
-                <span class="popup-val"><span class="popup-conf conf-pill ${confClass(det.confidence)}">${(det.confidence * 100).toFixed(1)}%</span></span>
+                <span class="popup-val"><span class="popup-conf conf-pill ${confClass(c)}">${(c * 100).toFixed(1)}%</span></span>
+            </div>
+            <div class="popup-row">
+                <span class="popup-key">Tamaño</span>
+                <span class="popup-val">${x2 - x1} × ${y2 - y1} px</span>
             </div>`;
         }).join('');
         return `
-            <div class="popup-title">ANÁLISIS ICTINO</div>
-            <div class="popup-row"><span class="popup-key">Detecciones</span><span class="popup-val">${detections.length}</span></div>
-            <div class="popup-row"><span class="popup-key">Confianza Máx</span><span class="popup-val">${(maxConf * 100).toFixed(1)}%</span></div>
+            <div class="popup-title">ICTINO</div>
+            <div class="popup-row"><span class="popup-key">Huecos</span><span class="popup-val">${detections.length}</span></div>
+            <div class="popup-row"><span class="popup-key">Confianza máx.</span><span class="popup-val">${(maxConf * 100).toFixed(1)}%</span></div>
             ${rows}
             <div class="popup-coords">${coords.lat.toFixed(6)}, ${coords.lng.toFixed(6)}</div>`;
     }
 
-    // ── INICIO DE APLICACIÓN ───────────────────────────────────────
+    function buildHistorialPopupHTML(registro, index) {
+        const rows = registro.detecciones.map((det, i) => {
+            const c = det.confidence;
+            const [x1, y1, x2, y2] = det.box.map(v => Math.round(v));
+            return `
+            <div class="popup-row">
+                <span class="popup-key">Hueco #${i + 1}</span>
+                <span class="popup-val"><span class="popup-conf conf-pill ${confClass(c)}">${(c * 100).toFixed(1)}%</span></span>
+            </div>
+            <div class="popup-row">
+                <span class="popup-key">Tamaño</span>
+                <span class="popup-val">${x2 - x1} × ${y2 - y1} px</span>
+            </div>`;
+        }).join('');
+
+        const thumbHTML = registro.thumbnail
+            ? `<img src="${registro.thumbnail}" class="popup-thumbnail" alt="Hueco">`
+            : '';
+
+        return `
+            <div class="popup-title">ICTINO</div>
+            ${thumbHTML}
+            <div class="popup-row"><span class="popup-key">Huecos</span><span class="popup-val">${registro.detecciones.length}</span></div>
+            <div class="popup-row"><span class="popup-key">Confianza máx.</span><span class="popup-val">${(registro.maxConf * 100).toFixed(1)}%</span></div>
+            <div class="popup-row"><span class="popup-key">Fecha</span><span class="popup-val">${registro.fecha}</span></div>
+            ${rows}
+            <div class="popup-coords">${registro.gps ? `${registro.gps.lat.toFixed(6)}, ${registro.gps.lng.toFixed(6)}` : 'Sin GPS'}</div>`;
+    }
+
+    // ── AL CARGAR EL DOCUMENTO ──────────────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
-        const savedUser = localStorage.getItem('ictino_user');
-        if(savedUser) {
-            currentUser = JSON.parse(savedUser);
-            updateAuthUI();
-            fetchServerHistory();
-        } else {
-            updateAuthUI();
-        }
+        verificarSesion();
     });
 </script>
 
