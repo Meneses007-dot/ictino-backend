@@ -1,0 +1,8 @@
+flask
+flask-cors
+ultralytics
+gunicorn
+pillow
+flask-sqlalchemy
+psycopg2-binary
+werkzeug

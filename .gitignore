@@ -1,0 +1,4 @@
+.venv/
+proyecto.db
+__pycache__/
+uploads/
