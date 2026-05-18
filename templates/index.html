@@ -24,1007 +24,850 @@
             --red:        #c0392b;
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *, *::before, *::after { box-sizing: border-box; }
 
         body {
+            margin: 0; padding: 0;
             background-color: var(--ink);
             color: var(--cream);
-            font-family: 'DM Mono', monospace;
+            font-family: 'Cormorant+Garamond', serif;
             min-height: 100vh;
+        }
+
+        /* ── SECCIÓN DE AUTENTICACIÓN ── */
+        .auth-wrapper {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            justify-content: flex-start;
-            padding: 2.5rem 2rem 4rem;
-            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(107,26,42,0.18) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 40% at 85% 90%, rgba(61,10,22,0.3) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: 0;
+        .brand-header {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
-        .wrapper {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 700px;
-            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-        }
-
-        /* ── ENCABEZADO ── */
-        header { margin-bottom: 3rem; }
-        .logo-line { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.4rem; }
-
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.8rem, 8vw, 4rem);
-            font-weight: 600;
-            letter-spacing: 0.18em;
+        .brand-header h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            margin: 0;
             color: var(--cream);
-            line-height: 1;
         }
 
-        .logo-accent {
-            display: inline-block;
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--wine-light);
-            margin-bottom: 4px;
-            box-shadow: 0 0 12px var(--wine-light);
-            animation: pulse 2.5s ease-in-out infinite;
+        .brand-header .subtitle {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-top: 10px;
         }
 
-        .tagline { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); font-weight: 300; }
-        .divider  { width: 100%; height: 1px; background: linear-gradient(90deg, var(--wine) 0%, transparent 100%); margin-top: 1.8rem; }
+        .auth-card {
+            background-color: rgba(61, 10, 22, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+        }
 
-        /* ── SECCIÓN DE LOGIN ── */
-        .auth-container { max-width: 420px; margin: 2rem auto; width: 100%; }
-        .auth-title { font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--wine-light); text-align: center; margin-bottom: 2rem; font-weight: 400; }
-        .form-group { margin-bottom: 1.2rem; }
-        .auth-input { width: 100%; padding: 1rem 1.2rem; background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 2px; color: var(--cream); font-family: 'DM Mono', monospace; font-size: 0.75rem; transition: border-color 0.2s; }
-        .auth-input:focus { outline: none; border-color: var(--wine-light); background: rgba(0,0,0,0.4); }
-        .auth-buttons { display: flex; gap: 1rem; margin-top: 1.8rem; }
-        .btn-auth { flex: 1; padding: 0.9rem; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
-        .btn-login { background: var(--wine); color: var(--cream); border: none; }
-        .btn-login:hover { background: var(--wine-mid); box-shadow: 0 4px 16px rgba(107,26,42,0.3); }
-        .btn-register { background: transparent; color: var(--muted); border: 1px solid var(--border); }
-        .btn-register:hover { border-color: var(--wine-light); color: var(--cream); }
-        .auth-message { font-size: 0.65rem; text-align: center; margin-top: 1rem; letter-spacing: 0.05em; min-height: 1.2em; }
-        .auth-message.error { color: var(--red); }
-        .auth-message.success { color: var(--green); }
+        .auth-title {
+            text-align: center;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            color: var(--wine-light);
+            margin-bottom: 35px;
+            text-transform: uppercase;
+        }
 
-        /* ── APLICACIÓN PRINCIPAL (OCULTA POR DEFECTO) ── */
-        #mainApp { display: none; }
-        #mainApp.visible { display: block; }
-        
-        /* ── INSTRUCCIONES VINOTINTO ── */
-        .inst-box { background: rgba(61, 10, 22, 0.4); border: 1px solid rgba(184, 64, 96, 0.3); border-radius: 2px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; }
-        .inst-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--cream); letter-spacing: 0.08em; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
-        .inst-text { font-size: 0.62rem; color: var(--cream-dim); line-height: 1.5; letter-spacing: 0.05em; }
+        .input-group {
+            margin-bottom: 25px;
+        }
 
-        /* ── TARJETA ── */
-        .card {
-            background: rgba(26, 10, 14, 0.6);
+        .input-group input {
+            width: 100%;
+            background-color: rgba(26, 10, 14, 0.6);
             border: 1px solid var(--border);
             border-radius: 2px;
-            padding: 2rem;
-            backdrop-filter: blur(8px);
-            margin-bottom: 1.5rem;
-        }
-
-        .section-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--wine-light); margin-bottom: 1rem; }
-
-        /* ── DROP ZONE ── */
-        .drop-zone {
-            border: 1px dashed var(--border);
-            border-radius: 2px;
-            padding: 2rem 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: border-color 0.25s, background 0.25s;
-            position: relative;
-            overflow: hidden;
-        }
-        .drop-zone:hover, .drop-zone.dragover { border-color: var(--wine-mid); background: rgba(107,26,42,0.08); }
-        .drop-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-
-        .drop-icon { width: 32px; height: 32px; margin: 0 auto 0.8rem; opacity: 0.5; transition: opacity 0.25s, transform 0.25s; }
-        .drop-zone:hover .drop-icon { opacity: 0.9; transform: translateY(-3px); }
-        .drop-icon svg { width: 100%; height: 100%; }
-        .drop-text { font-size: 0.7rem; color: var(--muted); }
-        .drop-text strong { color: var(--cream-dim); font-weight: 400; }
-        .file-name { margin-top: 0.6rem; font-size: 0.62rem; color: var(--wine-light); letter-spacing: 0.1em; min-height: 1em; }
-
-        /* ── GPS ── */
-        .gps-badge { display: none; align-items: center; gap: 0.5rem; margin-top: 0.8rem; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--green); }
-        .gps-badge.visible { display: flex; }
-        .gps-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-        .gps-badge.no-gps { color: var(--muted); }
-        .gps-badge.no-gps .gps-badge-dot { background: var(--muted); }
-
-        /* ── BOTÓN ANALIZAR ── */
-        .btn-detect {
-            width: 100%;
-            margin-top: 1.5rem;
-            padding: 0.9rem 1.5rem;
-            background: var(--wine);
+            padding: 14px 16px;
             color: var(--cream);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--wine-light);
+            box-shadow: 0 0 8px rgba(184, 64, 96, 0.2);
+        }
+
+        .auth-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            font-family: 'Cormorant+Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             border: none;
             border-radius: 2px;
-            font-family: 'DM Mono', monospace;
-            font-size: 0.68rem;
-            letter-spacing: 0.28em;
-            text-transform: uppercase;
             cursor: pointer;
-            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--wine);
+            color: var(--cream);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--wine-mid);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            color: var(--cream);
+            border-color: var(--wine-light);
+        }
+
+        .alert-error {
+            background-color: rgba(192, 57, 43, 0.15);
+            border: 1px solid rgba(192, 57, 43, 0.4);
+            color: #e74c3c;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            padding: 12px;
+            border-radius: 2px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        /* ── APP LAYOUT PANEL PRINCIPAL ── */
+        .app-grid {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            height: 100vh;
+            width: 100vw;
             overflow: hidden;
         }
-        .btn-detect:hover:not(:disabled) { background: var(--wine-mid); box-shadow: 0 4px 24px rgba(107,26,42,0.45); transform: translateY(-1px); }
-        .btn-detect:disabled { opacity: 0.45; cursor: not-allowed; }
-        .btn-detect::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); transform: translateX(-100%); }
-        .btn-detect.loading::after { animation: shimmer 1.2s infinite; }
 
-        /* ── RESULTADOS ── */
-        .results-section { margin-top: 1.8rem; display: none; animation: fadeUp 0.5s ease both; }
-        .results-section.visible { display: block; }
-
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--border);
-            border: 1px solid var(--border);
-            border-radius: 2px;
+        .sidebar {
+            background-color: rgba(30, 12, 16, 0.98);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
-            margin-bottom: 1.5rem;
+            z-index: 10;
         }
-        .stat-cell { background: rgba(26,10,14,0.8); padding: 1rem 1.2rem; display: flex; flex-direction: column; gap: 0.3rem; }
-        .stat-label { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-        .stat-value { font-size: 1.35rem; font-family: 'Cormorant Garamond', serif; font-weight: 600; color: var(--cream); line-height: 1; }
-        .stat-value.highlight { color: var(--wine-light); }
 
-        /* ── CANVAS ── */
-        .panel-label { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.7rem; }
-        .canvas-wrap { border: 1px solid var(--border); border-radius: 2px; overflow: hidden; background: #000; line-height: 0; }
-        canvas { max-width: 100%; display: block; }
-
-        /* ── TARJETAS DE DETECCIÓN ── */
-        .det-list { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
-
-        .det-card {
-            background: rgba(0,0,0,0.35);
-            border: 1px solid var(--border);
-            border-left: 3px solid var(--wine);
-            border-radius: 2px;
-            padding: 0.9rem 1.1rem;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            align-items: center;
-            gap: 1rem;
-            animation: fadeUp 0.4s ease both;
+        .sidebar-header {
+            padding: 25px;
+            border-bottom: 1px solid var(--border);
         }
-        .det-index { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--wine-light); line-height: 1; min-width: 1.8rem; }
-        .det-info  { display: flex; flex-direction: column; gap: 0.25rem; }
-        .det-class { font-size: 0.66rem; letter-spacing: 0.1em; color: var(--cream); text-transform: uppercase; }
-        .det-box   { font-size: 0.57rem; color: var(--muted); letter-spacing: 0.04em; }
 
-        .conf-pill { font-size: 0.62rem; letter-spacing: 0.1em; padding: 0.28rem 0.7rem; border-radius: 20px; white-space: nowrap; }
-        .conf-high { background: rgba(106,173,106,0.12); color: var(--green);      border: 1px solid rgba(106,173,106,0.3); }
-        .conf-mid  { background: rgba(184,64,96,0.12);   color: var(--wine-light); border: 1px solid rgba(184,64,96,0.3); }
-        .conf-low  { background: rgba(192,57,43,0.12);   color: var(--red);        border: 1px solid rgba(192,57,43,0.3); }
+        .sidebar-header h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin: 0;
+        }
 
-        /* ── BOTONES DE ACCIÓN ── */
-        .action-row { display: none; gap: 0.8rem; margin-top: 1.2rem; }
-        .action-row.visible { display: flex; }
-
-        .btn-action {
+        .sidebar-scroll {
             flex: 1;
-            padding: 0.78rem 1rem;
-            border-radius: 2px;
-            font-family: 'DM Mono', monospace;
-            font-size: 0.64rem;
-            letter-spacing: 0.24em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            overflow-y: auto;
+            padding: 25px;
         }
-        .btn-save { background: var(--wine); color: var(--cream); border: none; }
-        .btn-save:hover:not(:disabled) { background: var(--wine-mid); box-shadow: 0 4px 20px rgba(107,26,42,0.4); transform: translateY(-1px); }
-        .btn-save:disabled { opacity: 0.55; cursor: not-allowed; }
-        .btn-save.saved { background: rgba(106,173,106,0.18); color: var(--green); border: 1px solid rgba(106,173,106,0.35); }
-        .btn-map-expand { background: transparent; color: var(--wine-light); border: 1px solid var(--wine); }
-        .btn-map-expand:hover { background: rgba(107,26,42,0.15); transform: translateY(-1px); }
 
-        /* ── MAPA ── */
-        .map-section { margin-top: 1.8rem; display: none; animation: fadeUp 0.5s ease both; }
-        .map-section.visible { display: block; }
+        .panel-section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: var(--wine-light);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(184, 64, 96, 0.15);
+            padding-bottom: 5px;
+        }
+
+        /* Zona Drop File */
+        .drop-zone {
+            border: 2px dashed var(--border);
+            border-radius: 4px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: rgba(26, 10, 14, 0.4);
+        }
+
+        .drop-zone:hover {
+            border-color: var(--wine-light);
+            background-color: rgba(61, 10, 22, 0.2);
+        }
+
+        .drop-zone p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--cream-dim);
+        }
+
+        .drop-zone span {
+            display: block;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        /* Historial List */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .history-item {
+            background-color: rgba(26, 10, 14, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .history-item:hover {
+            border-color: var(--wine-light);
+            background-color: rgba(61, 10, 22, 0.15);
+        }
+
+        .history-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .history-date {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        .history-count {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--cream);
+        }
+
+        .history-coords {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--wine-light);
+        }
+
+        .btn-delete {
+            position: absolute;
+            right: 15px;
+            bottom: 10px;
+            background: none;
+            border: none;
+            color: #c0392b;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            cursor: pointer;
+            padding: 2px 5px;
+            border-radius: 2px;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .btn-delete:hover {
+            opacity: 1;
+            background-color: rgba(192,57,43,0.1);
+        }
+
+        /* Main Workspace */
+        .main-content {
+            display: grid;
+            grid-template-rows: 1fr 340px;
+            height: 100vh;
+            position: relative;
+        }
 
         #map {
             width: 100%;
-            height: 340px;
-            border: 1px solid var(--border);
+            height: 100%;
+            background-color: #11080a;
+        }
+
+        /* Inspección */
+        .inspection-panel {
+            background-color: #160c0e;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            overflow: hidden;
+        }
+
+        .canvas-container {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0,0,0,0.2);
+            border-right: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        #detectionCanvas {
+            max-width: 100%;
+            max-height: 290px;
             border-radius: 2px;
-            filter: saturate(0.6) brightness(0.85);
-            transition: height 0.35s cubic-bezier(0.16,1,0.3,1), filter 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
         }
-        #map:hover { filter: saturate(0.9) brightness(1); }
-        .map-section.expanded #map { height: 520px; }
 
-        /* Leaflet popup */
+        .metrics-container {
+            padding: 25px;
+            overflow-y: auto;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .metric-card {
+            background-color: rgba(26,10,14,0.4);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 3px;
+        }
+
+        .metric-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-top: 5px;
+        }
+
+        /* Leaflet popups oscuros */
         .leaflet-popup-content-wrapper {
-            background: #1A0A0E !important;
-            border: 1px solid rgba(107,26,42,0.5) !important;
-            border-radius: 2px !important;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important;
+            background: rgba(22, 12, 14, 0.95) !important;
             color: var(--cream) !important;
-            font-family: 'DM Mono', monospace !important;
+            border: 1px solid var(--wine-light);
+            border-radius: 4px !important;
+            font-family: 'Cormorant Garamond', serif;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7) !important;
+            backdrop-filter: blur(5px);
         }
-        .leaflet-popup-tip { background: #1A0A0E !important; }
-        .leaflet-popup-close-button { color: var(--muted) !important; }
 
-        .popup-title    { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--wine-light); letter-spacing: 0.12em; margin-bottom: 0.6rem; }
-        .popup-row      { display: flex; justify-content: space-between; align-items: center; font-size: 0.62rem; letter-spacing: 0.06em; padding: 0.3rem 0; border-bottom: 1px solid rgba(107,26,42,0.15); color: var(--cream-dim); gap: 1rem; }
-        .popup-row:last-child { border-bottom: none; }
-        .popup-key      { color: var(--muted); flex-shrink: 0; }
-        .popup-val      { text-align: right; }
-        .popup-conf     { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.6rem; }
-        .popup-coords   { margin-top: 0.6rem; font-size: 0.58rem; color: var(--muted); letter-spacing: 0.06em; }
-        .popup-thumbnail { width: 100%; max-width: 180px; height: auto; border: 1px solid var(--border); border-radius: 2px; margin: 0.5rem auto 0.2rem; display: block; }
+        .leaflet-popup-tip {
+            background: rgba(22, 12, 14, 0.95) !important;
+            border-left: 1px solid var(--wine-light);
+            border-bottom: 1px solid var(--wine-light);
+        }
 
-        .no-gps-notice  { padding: 1rem 1.2rem; border: 1px dashed var(--border); border-radius: 2px; font-size: 0.65rem; color: var(--muted); text-align: center; letter-spacing: 0.08em; }
-        .error-msg      { font-size: 0.7rem; color: var(--red); padding: 1rem; border: 1px solid rgba(192,57,43,0.3); border-radius: 2px; background: rgba(192,57,43,0.05); }
+        .popup-title {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--wine-light);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(184,64,96,0.2);
+            padding-bottom: 4px;
+        }
 
-        /* ── HISTORIAL ── */
-        .hist-row    { display: flex; gap: 1rem; align-items: center; justify-content: space-between; }
-        .hist-count  { font-size: 0.65rem; color: var(--muted); }
-        .hist-count span { color: var(--cream-dim); }
+        .popup-thumbnail {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 2px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(245,239,232,0.1);
+        }
 
-        .btn-hist { padding: 0.5rem 1rem; border-radius: 2px; font-family: 'DM Mono', monospace; font-size: 0.6 flex; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
-        .btn-hist-map { background: var(--wine); color: var(--cream); border: none; }
-        .btn-hist-map:hover { background: var(--wine-mid); }
-        .btn-hist-del { background: transparent; color: var(--red); border: 1px solid var(--red); }
-        .btn-hist-del:hover { background: rgba(192,57,43,0.1); }
+        .popup-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
 
-        /* ── BOTÓN CERRAR SESIÓN ── */
-        .btn-logout { background: transparent; border: 1px solid rgba(184, 64, 96, 0.4); color: var(--wine-light); padding: 0.4rem 0.8rem; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; font-family: 'DM Mono', monospace; cursor: pointer; border-radius: 2px; transition: all 0.2s; }
-        .btn-logout:hover { background: rgba(107, 26, 42, 0.2); color: var(--cream); }
+        .popup-key { color: var(--muted); }
+        .popup-val { font-weight: 600; }
+        
+        .popup-coords {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--wine-light);
+            margin-top: 8px;
+            text-align: right;
+        }
 
-        footer { margin-top: 2.5rem; text-align: center; font-size: 0.58rem; letter-spacing: 0.18em; color: rgba(156,138,143,0.3); text-transform: uppercase; }
-
-        @keyframes fadeUp  { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse   { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-        @keyframes shimmer { to { transform: translateX(100%); } }
+        .conf-pill {
+            padding: 1px 5px;
+            border-radius: 2px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+        }
+        .pill-high { background-color: rgba(106,173,106,0.2); color: var(--green); }
+        .pill-mid  { background-color: rgba(184,64,96,0.2);  color: var(--wine-light); }
+        .pill-low  { background-color: rgba(192,57,43,0.2);  color: var(--red); }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
+    <div id="authContainer" class="auth-wrapper">
+        <div class="brand-header">
+            <h1>ICTINO</h1>
+            <div class="subtitle">Detector de Huecos — Sistema de Análisis Visual</div>
+        </div>
 
-    <header>
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
-            <div>
-                <div class="logo-line">
-                    <span class="logo">ICTINO</span>
-                    <span class="logo-accent"></span>
-                </div>
-                <p class="tagline">Detector de Huecos — Sistema de Análisis Visual</p>
+        <div class="auth-card">
+            <div class="auth-title">Acceso al Sistema</div>
+            
+            <div class="input-group">
+                <input type="text" id="authUsername" placeholder="Usuario" autocomplete="off">
             </div>
-            <button id="logoutBtn" class="btn-logout" style="display: none;" onclick="cerrarSesion()">Salir</button>
-        </div>
-        <div class="divider"></div>
-    </header>
+            <div class="input-group">
+                <input type="password" id="authPassword" placeholder="Contraseña">
+            </div>
 
-    <div id="authBlock" class="card auth-container">
-        <h2 class="auth-title">Acceso al Sistema</h2>
-        <div class="form-group">
-            <input type="text" id="username" class="auth-input" placeholder="Usuario" autocomplete="off">
+            <div class="auth-actions">
+                <button class="btn btn-primary" onclick="ejecutarAuth('/login')">Iniciar Sesión</button>
+                <button class="btn btn-secondary" onclick="ejecutarAuth('/register')">Registrarse</button>
+            </div>
+
+            <div id="authError" class="alert-error"></div>
         </div>
-        <div class="form-group">
-            <input type="password" id="password" class="auth-input" placeholder="Contraseña">
-        </div>
-        <div class="auth-buttons">
-            <button class="btn-auth btn-login" onclick="ejecutarAuth('/login')">Iniciar Sesión</button>
-            <button class="btn-auth btn-register" onclick="ejecutarAuth('/register')">Registrarse</button>
-        </div>
-        <div id="authMessage" class="auth-message"></div>
     </div>
 
-    <div id="mainApp">
+    <div id="appContainer" class="app-grid" style="display: none;">
         
-        <div class="inst-box">
-            <h3 class="inst-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom:-1px;">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="16" x2="12" y2="12"></line>
-                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                </svg>
-                Instrucciones de Georreferenciación
-            </h3>
-            <p class="inst-text">
-                Para proyectar los daños viales sobre la cartografía digital, capture imágenes con los servicios de localización (GPS) activos en su dispositivo móvil. El sistema extraerá los metadatos de posicionamiento de manera automática durante la fase de análisis visual.
-            </p>
-        </div>
-
-        <div class="card">
-            <p class="section-label">Entrada de imagen</p>
-
-            <div class="drop-zone" id="dropZone">
-                <input type="file" id="imageInput" accept="image/*">
-                <div class="drop-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
-                         stroke-linecap="round" stroke-linejoin="round" style="color:var(--wine-light)">
-                        <rect x="3" y="3" width="18" height="18" rx="1"/>
-                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                        <polyline points="21 15 16 10 5 21"/>
-                    </svg>
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>ICTINO</h2>
+            </div>
+            
+            <div class="sidebar-scroll">
+                <div class="panel-section">
+                    <div class="section-title">Analizar Terreno</div>
+                    <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+                        <p>Arrastra una imagen o video</p>
+                        <span>O haz clic para buscar archivos</span>
+                        <input type="file" id="fileInput" accept="image/*,video/*" style="display: none;" onchange="procesarArchivo(this.files[0])">
+                    </div>
                 </div>
-                <p class="drop-text"><strong>Arrastra una imagen</strong> o haz clic para seleccionar</p>
-                <p class="drop-text" style="margin-top:0.3rem;font-size:0.6rem;">PNG · JPG · WEBP</p>
-                <div class="file-name" id="fileName"></div>
-            </div>
 
-            <div class="gps-badge" id="gpsBadge">
-                <span class="gps-badge-dot"></span>
-                <span id="gpsBadgeText"></span>
-            </div>
-
-            <button class="btn-detect" id="detectBtn" onclick="upload()" disabled>
-                Analizar imagen
-            </button>
-        </div>
-
-        <div class="results-section" id="resultsSection">
-
-            <div class="stats-row">
-                <div class="stat-cell">
-                    <span class="stat-label">Huecos detectados</span>
-                    <span class="stat-value highlight" id="statCount">—</span>
-                </div>
-                <div class="stat-cell">
-                    <span class="stat-label">Confianza máx.</span>
-                    <span class="stat-value" id="statMaxConf">—</span>
-                </div>
-                <div class="stat-cell">
-                    <span class="stat-label">Confianza prom.</span>
-                    <span class="stat-value" id="statAvgConf">—</span>
-                </div>
-            </div>
-
-            <div class="panel-label">
-                <span class="section-label" style="margin:0">Visualización</span>
-            </div>
-            <div class="canvas-wrap">
-                <canvas id="detectionCanvas"></canvas>
-            </div>
-
-            <div class="det-list" id="detList"></div>
-
-            <div class="action-row" id="actionRow">
-                <button class="btn-action btn-save" id="saveBtn" onclick="guardarRegistro()">Guardar registro</button>
-                <button class="btn-action btn-map-expand" onclick="verEnMapa()">Ver en mapa</button>
-            </div>
-
-        </div>
-
-        <div class="map-section" id="mapSection">
-            <div class="panel-label" style="margin-bottom:0.7rem">
-                <span class="section-label" style="margin:0">Ubicación geográfica</span>
-                <span id="coordsLabel" style="font-size:0.58rem;color:var(--muted);letter-spacing:0.08em"></span>
-            </div>
-            <div id="mapContainer"></div>
-        </div>
-
-        <div class="card" style="margin-top:1.5rem">
-            <p class="section-label">Historial de detecciones</p>
-            <div class="hist-row">
-                <div class="hist-count"><span id="totalRegistros">0</span> registros guardados</div>
-                <div style="display:flex;gap:0.6rem">
-                    <button class="btn-hist btn-hist-map" onclick="verHistorial()">Ver en mapa</button>
-                    <button class="btn-hist btn-hist-del" onclick="borrarHistorial()">Borrar todo</button>
+                <div class="panel-section">
+                    <div class="section-title">Registros Recientes</div>
+                    <div id="historyContainer" class="history-list">
+                        </div>
                 </div>
             </div>
         </div>
 
-    </div> <footer>
-        ICTINO &nbsp;·&nbsp; Análisis de Imagen &nbsp;·&nbsp; v1.1
-        <span style="margin:0 0.6rem;opacity:0.3">|</span>
-        <span style="font-size:0.55rem;letter-spacing:0.12em;opacity:0.5">Hecho por "MD"</span>
-    </footer>
+        <div class="main-content">
+            <div id="map"></div>
 
-</div>
+            <div class="inspection-panel">
+                <div class="canvas-container">
+                    <canvas id="detectionCanvas"></canvas>
+                </div>
+                <div class="metrics-container">
+                    <div class="section-title" style="margin-bottom: 5px;">Métricas de Inspección Actual</div>
+                    <div id="metricsPlaceholder" style="font-style: italic; color: var(--muted); margin-top: 10px;">
+                        Selecciona un registro o analiza una captura para desplegar la telemetría del modelo de IA.
+                    </div>
+                    <div id="metricsContent" class="metrics-grid" style="display: none;">
+                        <div class="metric-card">
+                            <div class="metric-label">Baches Detectados</div>
+                            <div id="mCount" class="metric-value">0</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Confianza Máxima</div>
+                            <div id="mMaxConf" class="metric-value">0%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">Coordenadas GPS</div>
+                            <div id="mGPS" class="metric-value" style="font-size: 1.1rem; font-family: 'DM Mono', monospace; margin-top: 12px; color: var(--wine-light);">Sin GPS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/exifr/dist/full.umd.js"></script>
+        </div>
+    </div>
 
-<script>
-    // ── CONFIGURACIÓN DE RUTAS AUTENTICACIÓN ────────────────────────
-    let currentUserId = null;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+        // --- VARIABLE GLOBAL DE CONFIGURACIÓN DE PRODUCCIÓN ---
+        const API_BASE_URL = "https://ictino-backend.onrender.com/api";
 
-    async function ejecutarAuth(endpoint) {
-        const userInp = document.getElementById('username').value.trim();
-        const passInp = document.getElementById('password').value.trim();
-        const msgDiv  = document.getElementById('authMessage');
+        let map = null;
+        let markersGroup = null;
+        let currentUserId = null;
 
-        if (!userInp || !passInp) {
-            msgDiv.className = "auth-message error";
-            msgDiv.textContent = "Por favor ingresa usuario y contraseña.";
-            return;
-        }
+        // Intentar recuperar sesión existente al cargar
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUid = localStorage.getItem('ictino_user_id');
+            if (savedUid) {
+                currentUserId = savedUid;
+                document.getElementById('authContainer').style.display = 'none';
+                document.getElementById('appContainer').style.display = 'grid';
+                initMap();
+                loadHistory();
+            }
+        });
 
-        msgDiv.className = "auth-message";
-        msgDiv.textContent = "Procesando...";
+        // ── 1. AUTENTICACIÓN (LOGIN / REGISTER) ──
+        async function ejecutarAuth(endpoint) {
+            const usernameInput = document.getElementById('authUsername');
+            const passwordInput = document.getElementById('authPassword');
+            const errorDiv      = document.getElementById('authError');
 
-        try {
-            const response = await fetch(endpoint, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: userInp, password: passInp })
-            });
+            errorDiv.style.display = "none";
 
-            const data = await response.json();
-
-            if (!response.ok || data.error) {
-                msgDiv.className = "auth-message error";
-                msgDiv.textContent = data.error || `Error en servidor (${response.status})`;
+            if (!usernameInput.value || !passwordInput.value) {
+                errorDiv.textContent = "Por favor, completa todos los campos.";
+                errorDiv.style.display = "block";
                 return;
             }
 
-            if (endpoint === '/register') {
-                msgDiv.className = "auth-message success";
-                msgDiv.textContent = "Registro exitoso. ¡Ya puedes iniciar sesión arriba!";
-                document.getElementById('password').value = "";
-            } else if (endpoint === '/login') {
-                currentUserId = data.user_id;
-                localStorage.setItem('ictino_user_id', currentUserId);
-                localStorage.setItem('ictino_username', userInp);
-                
-                msgDiv.textContent = "";
-                verificarSesion();
+            try {
+                // Se concatena la URL base de producción de Render (/api/login o /api/register)
+                const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: usernameInput.value,
+                        password: passwordInput.value
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.status === 'success') {
+                    currentUserId = data.user_id;
+                    localStorage.setItem('ictino_user_id', currentUserId);
+                    
+                    document.getElementById('authContainer').style.display = 'none';
+                    document.getElementById('appContainer').style.display = 'grid';
+                    
+                    initMap();
+                    loadHistory();
+                } else {
+                    errorDiv.textContent = data.error || "Error en la autenticación.";
+                    errorDiv.style.display = "block";
+                }
+            } catch (err) {
+                console.error(err);
+                errorDiv.textContent = "Error de red o JSON inválido en el servidor.";
+                errorDiv.style.display = "block";
             }
-        } catch (err) {
-            msgDiv.className = "auth-message error";
-            msgDiv.textContent = "Error de red o JSON inválido en el servidor.";
-            console.error(err);
         }
-    }
 
-    function verificarSesion() {
-        const guardadoId = localStorage.getItem('ictino_user_id');
-        if (guardadoId) {
-            currentUserId = guardadoId;
-            document.getElementById('authBlock').style.display = 'none';
-            document.getElementById('mainApp').classList.add('visible');
-            document.getElementById('logoutBtn').style.display = 'block';
-            actualizarContadorHistorial();
-        } else {
-            document.getElementById('authBlock').style.display = 'block';
-            document.getElementById('mainApp').classList.remove('visible');
-            document.getElementById('logoutBtn').style.display = 'none';
+        // ── 2. INICIALIZACIÓN DEL MAPA ──
+        function initMap() {
+            if (map) return;
+
+            // Centrado por defecto en Popayán, Cauca
+            map = L.map('map', { zoomControl: false }).setView([2.4448, -76.6147], 14);
+            L.control.zoom({ position: 'topright' }).addTo(map);
+
+            // Capa oscura CartoDB
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap &copy; CARTO'
+            }).addTo(map);
+
+            markersGroup = L.layerGroup().addTo(map);
         }
-    }
 
-    function cerrarSesion() {
-        localStorage.removeItem('ictino_user_id');
-        localStorage.removeItem('ictino_username');
-        currentUserId = null;
-        location.reload();
-    }
+        // ── 3. HISTORIAL (PROCESAMIENTO Y RENDERIZADO) ──
+        async function loadHistory() {
+            if (!currentUserId) return;
+            try {
+                const response = await fetch(`${API_BASE_URL}/history?user_id=${currentUserId}`);
+                const data = await response.json();
 
-    function actualizarContadorHistorial() {
-        const historial = JSON.parse(localStorage.getItem('ictino_historial') || '[]');
-        document.getElementById('totalRegistros').textContent = historial.length;
-    }
+                const container = document.getElementById('historyContainer');
+                container.innerHTML = '';
+                markersGroup.clearLayers();
 
-    // ── REFERENCIAS DOM APLICACIÓN ──────────────────────────────────
-    const imageInput     = document.getElementById('imageInput');
-    const fileName       = document.getElementById('fileName');
-    const detectBtn      = document.getElementById('detectBtn');
-    const dropZone       = document.getElementById('dropZone');
-    const resultsSection = document.getElementById('resultsSection');
-    const mapSection     = document.getElementById('mapSection');
-    const gpsBadge       = document.getElementById('gpsBadge');
-    const gpsBadgeText   = document.getElementById('gpsBadgeText');
+                if (!data.records || data.records.length === 0) {
+                    container.innerHTML = '<div style="font-style:italic; color:var(--muted); text-align:center; padding:10px;">Sin registros analizados</div>';
+                    return;
+                }
 
-    // ── ESTADO DE LA APLICACIÓN ─────────────────────────────────────
-    let loadedImage        = null;   
-    let currentImageDataURL = null;  
-    let gpsCoords          = null;   
-    let leafletMap         = null;
-    let lastDetections     = [];
+                data.records.forEach(rec => {
+                    // Agregar marcador al mapa si cuenta con GPS
+                    if (rec.gps && rec.gps.lat && rec.gps.lng) {
+                        const markerColor = rec.maxConf >= 0.6 ? '#6aad6a' : rec.maxConf >= 0.35 ? '#B84060' : '#c0392b';
+                        const marker = L.circleMarker([rec.gps.lat, rec.gps.lng], {
+                            radius: 8,
+                            fillColor: markerColor,
+                            color: '#F5EFE8',
+                            weight: 1.5,
+                            opacity: 1,
+                            fillOpacity: 0.9
+                        });
 
-    // ── SELECCIÓN DE ARCHIVO ──────────────────────────────────────
-    imageInput.addEventListener('change', async () => {
-        const file = imageInput.files[0];
-        if (!file) return;
+                        marker.bindPopup(buildPopupHTML(rec));
+                        marker.on('click', () => mostrarEnInspeccion(rec));
+                        markersGroup.addLayer(marker);
+                    }
 
-        fileName.textContent = file.name;
-        detectBtn.disabled = false;
+                    // Renderizar item en el Sidebar lateral
+                    const item = document.createElement('div');
+                    item.className = 'history-item';
+                    item.onclick = () => {
+                        mostrarEnInspeccion(rec);
+                        if (rec.gps) map.setView([rec.gps.lat, rec.gps.lng], 16);
+                    };
 
-        const reader = new FileReader();
-        reader.onload = e => {
-            const img = new Image();
-            img.onload = () => {
-                loadedImage = img;
-                currentImageDataURL = e.target.result;
-            };
-            img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
+                    const gpsText = rec.gps ? `${rec.gps.lat.toFixed(4)}, ${rec.gps.lng.toFixed(4)}` : 'Sin Telemetría GPS';
 
-        gpsCoords = await extractGPS(file);
-        showGPSBadge(gpsCoords);
-    });
+                    item.innerHTML = `
+                        <div class="history-meta">
+                            <span class="history-date">${rec.fecha}</span>
+                            <span class="history-count">${rec.detecciones.length} baches</span>
+                        </div>
+                        <div class="history-coords">${gpsText}</div>
+                        <button class="btn-delete" onclick="eliminarRegistro(event, ${rec.id})">Borrar</button>
+                    `;
+                    container.appendChild(item);
+                });
 
-    dropZone.addEventListener('dragover',  e => { e.preventDefault(); dropZone.classList.add('dragover'); });
-    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-    dropZone.addEventListener('drop', e => {
-        e.preventDefault();
-        dropZone.classList.remove('dragover');
-        const file = e.dataTransfer.files[0];
-        if (file && file.type.startsWith('image/')) {
-            const dt = new DataTransfer();
-            dt.items.add(file);
-            imageInput.files = dt.files;
-            imageInput.dispatchEvent(new Event('change'));
-        }
-    });
-
-    // ── EXTRACCIÓN GPS EXIF ─────────────────────────────────────────
-    async function extractGPS(file) {
-        try {
-            const gps = await exifr.gps(file);
-            if (gps && gps.latitude != null && gps.longitude != null)
-                return { lat: gps.latitude, lng: gps.longitude };
-        } catch (_) {}
-        return null;
-    }
-
-    function showGPSBadge(coords) {
-        gpsBadge.classList.add('visible');
-        if (coords) {
-            gpsBadge.classList.remove('no-gps');
-            gpsBadge.querySelector('.gps-badge-dot').style.background = 'var(--green)';
-            gpsBadgeText.style.color = 'var(--green)';
-            gpsBadgeText.textContent = `GPS detectado · ${coords.lat.toFixed(5)}, ${coords.lng.toFixed(5)}`;
-        } else {
-            gpsBadge.classList.add('no-gps');
-            gpsBadge.querySelector('.gps-badge-dot').style.background = 'var(--muted)';
-            gpsBadgeText.style.color = 'var(--muted)';
-            gpsBadgeText.textContent = 'Sin datos GPS en esta imagen';
-        }
-    }
-
-    // ── DIBUJO EN CANVAS ──────────────────────────────────────────
-    function confColor(c) {
-        if (c >= 0.6)  return '#6aad6a';   
-        if (c >= 0.35) return '#B84060';   
-        return '#c0392b';                  
-    }
-
-    function drawDetections(img, detections) {
-        const canvas = document.getElementById('detectionCanvas');
-        const ctx    = canvas.getContext('2d');
-        const maxW   = canvas.parentElement.clientWidth || 640;
-        
-        // 1. Calculamos la escala de visualización de la imagen
-        const scale  = Math.min(1, maxW / img.naturalWidth);
-
-        // 2. Definimos el tamaño del lienzo en el navegador
-        canvas.width  = img.naturalWidth  * scale;
-        canvas.height = img.naturalHeight * scale;
-        
-        // 3. Dibujamos la imagen de fondo adaptada
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-        detections.forEach((det, i) => {
-            // --- AQUÍ ESTÁ LA CORRECCIÓN ---
-            // Si tu backend devuelve las coordenadas normalizadas (entre 0 y 1):
-            let [x1, y1, x2, y2] = det.box;
-            
-            // Si los valores son menores o iguales a 1, significa que son porcentajes.
-            // Los multiplicamos por el ancho y alto ACTUAL del canvas para que encajen perfectos.
-            if (x1 <= 1 && x2 <= 1 && y1 <= 1 && y2 <= 1) {
-                x1 *= canvas.width;
-                x2 *= canvas.width;
-                y1 *= canvas.height;
-                y2 *= canvas.height;
-            } else {
-                // Si el backend ya mandaba píxeles absolutos de la imagen original, 
-                // solo hacía falta multiplicarlos por la escala actual del lienzo:
-                x1 *= scale;
-                x2 *= scale;
-                y1 *= scale;
-                y2 *= scale;
+            } catch (err) {
+                console.error("Error cargando historial:", err);
             }
-            // ------------------------------
-
-            const c     = det.confidence;
-            const color = confColor(c);
-
-            ctx.shadowColor = color;
-            ctx.shadowBlur  = 14;
-            ctx.strokeStyle = color;
-            ctx.lineWidth   = 2;
-            ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
-            ctx.shadowBlur  = 0;
-
-            const label = `#${i + 1}  ${(c * 100).toFixed(1)}%`;
-            const fSize = 12;
-            ctx.font    = `${fSize}px "DM Mono", monospace`;
-            const tw    = ctx.measureText(label).width;
-            const lh    = fSize + 8;
-
-            ctx.fillStyle = c >= 0.6
-                ? 'rgba(106,173,106,0.88)'
-                : c >= 0.35
-                    ? 'rgba(107,26,42,0.88)'
-                    : 'rgba(192,57,43,0.88)';
-            ctx.fillRect(x1, y1 - lh, tw + 12, lh);
-
-            ctx.fillStyle = '#F5EFE8';
-            ctx.fillText(label, x1 + 6, y1 - 5);
-        });
-    }
-        const canvas = document.getElementById('detectionCanvas');
-        const ctx    = canvas.getContext('2d');
-        const maxW   = canvas.parentElement.clientWidth || 640;
-        const scale  = Math.min(1, maxW / img.naturalWidth);
-
-        canvas.width  = img.naturalWidth  * scale;
-        canvas.height = img.naturalHeight * scale;
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-        detections.forEach((det, i) => {
-            const [x1, y1, x2, y2] = det.box.map(v => v * scale);
-            const c     = det.confidence;
-            const color = confColor(c);
-
-            ctx.shadowColor = color;
-            ctx.shadowBlur  = 14;
-            ctx.strokeStyle = color;
-            ctx.lineWidth   = 2;
-            ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
-            ctx.shadowBlur  = 0;
-
-            const label = `#${i + 1}  ${(c * 100).toFixed(1)}%`;
-            const fSize = 12;
-            ctx.font    = `${fSize}px "DM Mono", monospace`;
-            const tw    = ctx.measureText(label).width;
-            const lh    = fSize + 8;
-
-            ctx.fillStyle = c >= 0.6
-                ? 'rgba(106,173,106,0.88)'
-                : c >= 0.35
-                    ? 'rgba(107,26,42,0.88)'
-                    : 'rgba(192,57,43,0.88)';
-            ctx.fillRect(x1, y1 - lh, tw + 12, lh);
-
-            ctx.fillStyle = '#F5EFE8';
-            ctx.fillText(label, x1 + 6, y1 - 5);
-        });
-    }
-
-    function crearMiniatura(imageData, bbox, maxWidth = 120) {
-        return new Promise(resolve => {
-            const img = new Image();
-            img.onload = () => {
-                const canvas = document.createElement('canvas');
-                const ctx    = canvas.getContext('2d');
-                const [x1, y1, x2, y2] = bbox;
-                const w = x2 - x1, h = y2 - y1;
-                canvas.width  = w;
-                canvas.height = h;
-                ctx.drawImage(img, x1, y1, w, h, 0, 0, w, h);
-                resolve(canvas.toDataURL('image/jpeg', 0.75));
-            };
-            img.onerror = () => resolve(null);
-            img.src = imageData;
-        });
-    }
-
-    // ── RENDERIZADO DE TARJETAS ─────────────────────────────────────
-    function confClass(c) {
-        if (c >= 0.6)  return 'conf-high';
-        if (c >= 0.35) return 'conf-mid';
-        return 'conf-low';
-    }
-
-    function renderCards(detections) {
-        const list = document.getElementById('detList');
-        list.innerHTML = '';
-        if (!detections.length) {
-            list.innerHTML = '<p style="font-size:0.7rem;color:var(--muted);text-align:center;padding:1.5rem 0">No se detectaron huecos.</p>';
-            return;
         }
-        detections.forEach((det, i) => {
-            const [x1, y1, x2, y2] = det.box.map(v => Math.round(v));
-            const card = document.createElement('div');
-            card.className = 'det-card';
-            card.style.animationDelay = `${i * 0.07}s`;
-            card.innerHTML = `
-                <span class="det-index">${String(i + 1).padStart(2, '0')}</span>
-                <div class="det-info">
-                    <span class="det-class">Pothole · Hueco detectado</span>
-                    <span class="det-box">Bbox: (${x1}, ${y1}) → (${x2}, ${y2}) &nbsp;|&nbsp; ${x2 - x1} × ${y2 - y1} px</span>
-                </div>
-                <span class="conf-pill ${confClass(det.confidence)}">${(det.confidence * 100).toFixed(1)}%</span>
-            `;
-            list.appendChild(card);
-        });
-    }
 
-    function updateStats(detections) {
-        const n = detections.length;
-        document.getElementById('statCount').textContent = n;
-        if (!n) {
-            document.getElementById('statMaxConf').textContent = '—';
-            document.getElementById('statAvgConf').textContent = '—';
-            return;
-        }
-        const confs = detections.map(d => d.confidence);
-        document.getElementById('statMaxConf').textContent = `${(Math.max(...confs) * 100).toFixed(1)}%`;
-        document.getElementById('statAvgConf').textContent = `${(confs.reduce((a, b) => a + b, 0) / confs.length * 100).toFixed(1)}%`;
-    }
+        // ── 4. ANALIZAR NUEVOS ARCHIVOS (DOCK DE DETECCIÓN) ──
+        async function procesarArchivo(file) {
+            if (!file) return;
 
-    // ── PROCESAMIENTO E INTERACCIÓN CON BACKEND ─────────────────────
-    async function upload() {
-        if (!imageInput.files.length) return;
-
-        detectBtn.disabled = true;
-        detectBtn.classList.add('loading');
-        detectBtn.textContent = 'Analizando...';
-        resultsSection.classList.remove('visible');
-        mapSection.classList.remove('visible', 'expanded');
-
-        try {
             const formData = new FormData();
-            formData.append('image', imageInput.files[0]);
-            
-            // Añadimos el user_id activo a la petición de análisis
-            if (currentUserId) {
-                formData.append('user_id', currentUserId);
+            formData.append('file', file);
+            formData.append('user_id', currentUserId);
+
+            // Simulación o captura de coordenadas locales (Popayán aproximado para pruebas)
+            const lat = 2.444 + (Math.random() - 0.5) * 0.01;
+            const lng = -76.614 + (Math.random() - 0.5) * 0.01;
+            formData.append('latitud', lat);
+            formData.append('longitud', lng);
+
+            try {
+                document.getElementById('metricsPlaceholder').textContent = "Procesando mapa de bits mediante IA...";
+                document.getElementById('metricsContent').style.display = "none";
+
+                const response = await fetch(`${API_BASE_URL}/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) throw new Error("Error en la respuesta de la API");
+
+                await loadHistory();
+                
+                // Mostrar el último registro subido automáticamente en la telemetría
+                const resData = await response.json();
+                if (resData.record) {
+                    mostrarEnInspeccion(resData.record);
+                    if (resData.record.gps) map.setView([resData.record.gps.lat, resData.record.gps.lng], 16);
+                }
+
+            } catch (err) {
+                console.error(err);
+                document.getElementById('metricsPlaceholder').textContent = "Error al procesar el archivo en el servidor.";
             }
-
-            const response = await fetch('/detect', { method: 'POST', body: formData });
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const data = await response.json();
-            if (data.error) throw new Error(data.error);
-
-            lastDetections = data.detections || [];
-
-            resultsSection.classList.add('visible');
-            updateStats(lastDetections);
-            renderCards(lastDetections);
-
-            const tryDraw = () => {
-                if (loadedImage) drawDetections(loadedImage, lastDetections);
-                else             setTimeout(tryDraw, 150);
-            };
-            tryDraw();
-
-            const actionRow = document.getElementById('actionRow');
-            actionRow.classList.add('visible');
-            const saveBtn = document.getElementById('saveBtn');
-            saveBtn.textContent = 'Guardar registro';
-            saveBtn.disabled    = false;
-            saveBtn.className   = 'btn-action btn-save';
-
-        } catch (err) {
-            resultsSection.classList.add('visible');
-            document.getElementById('detList').innerHTML =
-                `<div class="error-msg">Error al conectar con el servidor: ${err.message}</div>`;
-            ['statCount', 'statMaxConf', 'statAvgConf'].forEach(id =>
-                document.getElementById(id).textContent = '—');
-        } finally {
-            detectBtn.disabled  = false;
-            detectBtn.classList.remove('loading');
-            detectBtn.textContent = 'Analizar imagen';
-        }
-    }
-
-    // ── MANEJO DE HISTORIAL LOCAL ───────────────────────────────────
-    async function guardarRegistro() {
-        if (!lastDetections.length) return;
-
-        const saveBtn = document.getElementById('saveBtn');
-        saveBtn.disabled    = true;
-        saveBtn.textContent = 'Guardando...';
-
-        let thumbnail = null;
-        if (currentImageDataURL && lastDetections.length) {
-            const principal = lastDetections.reduce((max, d) => d.confidence > max.confidence ? d : max, lastDetections[0]);
-            thumbnail = await crearMiniatura(currentImageDataURL, principal.box).catch(() => null);
         }
 
-        const historial = JSON.parse(localStorage.getItem('ictino_historial') || '[]');
-        const registro  = {
-            id:          Date.now(),
-            user_id:     currentUserId,
-            fecha:       new Date().toLocaleString('es-ES'),
-            gps:         gpsCoords,
-            detecciones: lastDetections,
-            maxConf:     Math.max(...lastDetections.map(d => d.confidence)),
-            thumbnail:   thumbnail   
-        };
-        historial.push(registro);
+        // ── 5. ELIMINAR REGISTROS ──
+        async function eliminarRegistro(event, recordId) {
+            event.stopPropagation(); // Evita activar el click del contenedor contenedor
+            if (!confirm("¿Deseas remover de forma permanente esta telemetría del historial?")) return;
 
-        try {
-            localStorage.setItem('ictino_historial', JSON.stringify(historial));
-        } catch {
-            const reducido = historial.slice(-15).map(r => ({ ...r, thumbnail: null }));
-            localStorage.setItem('ictino_historial', JSON.stringify(reducido));
+            try {
+                const response = await fetch(`${API_BASE_URL}/delete_record`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ record_id: recordId })
+                });
+
+                if (response.ok) {
+                    loadHistory();
+                    document.getElementById('metricsContent').style.display = "none";
+                    document.getElementById('metricsPlaceholder').style.display = "block";
+                    document.getElementById('metricsPlaceholder').textContent = "Selecciona un registro o analiza una captura para desplegar la telemetría del modelo de IA.";
+                    const canvas = document.getElementById('detectionCanvas');
+                    const ctx = canvas.getContext('2d');
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            } catch (err) {
+                console.error("Error eliminando registro:", err);
+            }
         }
 
-        actualizarContadorHistorial();
-        saveBtn.className   = 'btn-action btn-save saved';
-        saveBtn.textContent = 'Guardado ✓';
-    }
+        // ── 6. CONTROLADORES DE RENDERIZADO VISUAL (CANVAS & INSPECCIÓN) ──
+        function mostrarEnInspeccion(registro) {
+            document.getElementById('metricsPlaceholder').style.display = "none";
+            document.getElementById('metricsContent').style.display = "grid";
 
-    function verEnMapa() {
-        renderMap(gpsCoords, lastDetections);
-        mapSection.classList.add('expanded');
-        mapSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+            document.getElementById('mCount').textContent = registro.detecciones.length;
+            document.getElementById('mMaxConf').textContent = `${(registro.maxConf * 100).toFixed(1)}%`;
+            document.getElementById('mGPS').textContent = registro.gps 
+                ? `${registro.gps.lat.toFixed(6)}, ${registro.gps.lng.toFixed(6)}` 
+                : 'Sin Coordenadas';
 
-    function verHistorial() {
-        if (!leafletMap) renderMap(null, []);   
-        cargarHistorialEnMapa();
-        mapSection.classList.add('visible', 'expanded');
-        mapSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function borrarHistorial() {
-        if (confirm('¿Borrar todo el historial guardado?')) {
-            localStorage.removeItem('ictino_historial');
-            actualizarContadorHistorial();
-            location.reload();
-        }
-    }
-
-    // ── GESTIÓN DE MAPAS CON LEAFLET ────────────────────────────────
-    function renderMap(coords, detections) {
-        const container = document.getElementById('mapContainer');
-        mapSection.classList.add('visible');
-
-        if (!coords) {
-            container.innerHTML = `
-                <div class="no-gps-notice">
-                    Esta imagen no contiene datos GPS en su metadata EXIF.<br>
-                    <span style="font-size:0.6rem;opacity:0.6;margin-top:0.4rem;display:block">
-                        Toma la foto con GPS activo en tu dispositivo para ver la ubicación aquí.
-                    </span>
-                </div>`;
-            document.getElementById('coordsLabel').textContent = '';
-            return;
+            const img = new Image();
+            img.crossOrigin = "anonymous"; 
+            img.src = registro.thumbnail || '';
+            img.onload = () => drawDetections(img, registro.detecciones);
         }
 
-        document.getElementById('coordsLabel').textContent =
-            `${coords.lat.toFixed(5)}, ${coords.lng.toFixed(5)}`;
+        function drawDetections(img, detections) {
+            const canvas = document.getElementById('detectionCanvas');
+            const ctx    = canvas.getContext('2d');
+            const maxW   = canvas.parentElement.clientWidth || 640;
+            
+            // 1. Calculamos la escala proporcional del contenedor
+            const scale  = Math.min(1, maxW / img.naturalWidth);
 
-        if (leafletMap) { leafletMap.remove(); leafletMap = null; }
+            // 2. Ajustamos las dimensiones reales del lienzo
+            canvas.width  = img.naturalWidth  * scale;
+            canvas.height = img.naturalHeight * scale;
+            
+            // 3. Renderizamos la imagen escalada al Canvas
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-        container.innerHTML = '<div id="map"></div>';
+            detections.forEach((det, i) => {
+                // --- CORRECCIÓN INTEGRADA DE COORDENADAS ---
+                let [x1, y1, x2, y2] = det.box;
+                
+                // Detección automática de formato: si son floats relativos (<= 1) se multiplican por el ancho actual,
+                // de lo contrario (píxeles absolutos) se adaptan con el multiplicador de escala.
+                if (x1 <= 1 && x2 <= 1 && y1 <= 1 && y2 <= 1) {
+                    x1 *= canvas.width;
+                    x2 *= canvas.width;
+                    y1 *= canvas.height;
+                    y2 *= canvas.height;
+                } else {
+                    x1 *= scale;
+                    x2 *= scale;
+                    y1 *= scale;
+                    y2 *= scale;
+                }
+                // ------------------------------------------
 
-        leafletMap = L.map('map', { zoomControl: true }).setView([coords.lat, coords.lng], 18);
+                const c     = det.confidence;
+                const color = confColor(c);
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '© OpenStreetMap © CARTO',
-            maxZoom: 20,
-            subdomains: 'abcd'
-        }).addTo(leafletMap);
+                // Configuración de los Bounding Boxes
+                ctx.shadowColor = color;
+                ctx.shadowBlur  = 14;
+                ctx.strokeStyle = color;
+                ctx.lineWidth   = 2;
+                ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+                ctx.shadowBlur  = 0;
 
-        const markerIcon = L.divIcon({
-            className: '',
-            html: `<div style="width:18px;height:18px;background:#B84060;border:2.5px solid #F5EFE8;border-radius:50%;
-                   box-shadow:0 0 0 4px rgba(184,64,96,0.3),0 0 16px rgba(184,64,96,0.5);
-                   animation:markerPulse 2s ease-in-out infinite;"></div>
-                   <style>@keyframes markerPulse{0%,100%{box-shadow:0 0 0 4px rgba(184,64,96,0.3),0 0 16px rgba(184,64,96,0.5);}50%{box-shadow:0 0 0 8px rgba(184,64,96,0.1),0 0 24px rgba(184,64,96,0.7);}}</style>`,
-            iconSize: [18, 18], iconAnchor: [9, 9], popupAnchor: [0, -14]
-        });
+                // Construcción de la etiqueta flotante (Label)
+                const label = `#${i + 1}  ${(c * 100).toFixed(1)}%`;
+                const fSize = 12;
+                ctx.font    = `${fSize}px "DM Mono", monospace`;
+                const tw    = ctx.measureText(label).width;
+                const lh    = fSize + 8;
 
-        const marker = L.marker([coords.lat, coords.lng], { icon: markerIcon }).addTo(leafletMap);
-
-        if (detections.length) {
-            marker.bindPopup(buildPopupHTML(detections, coords), { maxWidth: 260, minWidth: 220 }).openPopup();
-        }
-
-        cargarHistorialEnMapa();
-    }
-
-    function cargarHistorialEnMapa() {
-        const historial = JSON.parse(localStorage.getItem('ictino_historial') || '[]');
-        if (!leafletMap || !historial.length) return;
-
-        const group = L.featureGroup();
-
-        historial.forEach((reg, i) => {
-            if (!reg.gps) return;
-            // Filtrar opcionalmente por usuario
-            if (reg.user_id && reg.user_id !== currentUserId) return;
-
-            const marker = L.circleMarker([reg.gps.lat, reg.gps.lng], {
-                radius: 8,
-                fillColor:   i === historial.length - 1 ? '#B84060' : '#6aad6a',
-                color:       '#fff',
-                weight:      2,
-                opacity:     0.8,
-                fillOpacity: 0.6
+                ctx.fillStyle = c >= 0.6
+                    ? 'rgba(106,173,106,0.88)'
+                    : c >= 0.35
+                        ? 'rgba(184,64,96,0.88)'
+                        : 'rgba(192,57,43,0.88)';
+                
+                ctx.fillRect(x1, y1 - lh, tw + 12, lh);
+                ctx.fillStyle = '#F5EFE8';
+                ctx.fillText(label, x1 + 6, y1 - 5);
             });
-            marker.bindPopup(buildHistorialPopupHTML(reg, i), { maxWidth: 280 });
-            group.addLayer(marker);
-        });
+        }
 
-        group.addTo(leafletMap);
-        if (group.getLayers().length > 0)
-            leafletMap.fitBounds(group.getBounds().pad(0.1));
-    }
+        // Auxiliares estéticos
+        function confColor(c) {
+            if (c >= 0.6)  return '#6aad6a';
+            if (c >= 0.35) return '#B84060';
+            return '#c0392b';
+        }
 
-    function buildPopupHTML(detections, coords) {
-        const maxConf = Math.max(...detections.map(d => d.confidence));
-        const rows = detections.map((det, i) => {
-            const c = det.confidence;
-            const [x1, y1, x2, y2] = det.box.map(v => Math.round(v));
+        function confClass(c) {
+            if (c >= 0.6)  return 'pill-high';
+            if (c >= 0.35) return 'pill-mid';
+            return 'pill-low';
+        }
+
+        function buildPopupHTML(registro) {
+            const rows = registro.detecciones.map((det, i) => {
+                const c = det.confidence;
+                let [x1, y1, x2, y2] = det.box;
+                const w = Math.round(x2 - x1);
+                const h = Math.round(y2 - y1);
+                
+                return `
+                <div class="popup-row">
+                    <span class="popup-key">Hueco #${i + 1}</span>
+                    <span class="popup-val"><span class="popup-conf conf-pill ${confClass(c)}">${(c * 100).toFixed(1)}%</span></span>
+                </div>
+                <div class="popup-row" style="margin-bottom: 8px;">
+                    <span class="popup-key">Resolución</span>
+                    <span class="popup-val" style="font-family:'DM Mono', monospace; font-size:0.75rem;">${w}×${h} px</span>
+                </div>`;
+            }).join('');
+
+            const thumbHTML = registro.thumbnail
+                ? `<img src="${registro.thumbnail}" class="popup-thumbnail" alt="Bache">`
+                : '';
+
             return `
-            <div class="popup-row">
-                <span class="popup-key">Hueco #${i + 1}</span>
-                <span class="popup-val"><span class="popup-conf conf-pill ${confClass(c)}">${(c * 100).toFixed(1)}%</span></span>
-            </div>
-            <div class="popup-row">
-                <span class="popup-key">Tamaño</span>
-                <span class="popup-val">${x2 - x1} × ${y2 - y1} px</span>
-            </div>`;
-        }).join('');
-        return `
-            <div class="popup-title">ICTINO</div>
-            <div class="popup-row"><span class="popup-key">Huecos</span><span class="popup-val">${detections.length}</span></div>
-            <div class="popup-row"><span class="popup-key">Confianza máx.</span><span class="popup-val">${(maxConf * 100).toFixed(1)}%</span></div>
-            ${rows}
-            <div class="popup-coords">${coords.lat.toFixed(6)}, ${coords.lng.toFixed(6)}</div>`;
-    }
-
-    function buildHistorialPopupHTML(registro, index) {
-        const rows = registro.detecciones.map((det, i) => {
-            const c = det.confidence;
-            const [x1, y1, x2, y2] = det.box.map(v => Math.round(v));
-            return `
-            <div class="popup-row">
-                <span class="popup-key">Hueco #${i + 1}</span>
-                <span class="popup-val"><span class="popup-conf conf-pill ${confClass(c)}">${(c * 100).toFixed(1)}%</span></span>
-            </div>
-            <div class="popup-row">
-                <span class="popup-key">Tamaño</span>
-                <span class="popup-val">${x2 - x1} × ${y2 - y1} px</span>
-            </div>`;
-        }).join('');
-
-        const thumbHTML = registro.thumbnail
-            ? `<img src="${registro.thumbnail}" class="popup-thumbnail" alt="Hueco">`
-            : '';
-
-        return `
-            <div class="popup-title">ICTINO</div>
-            ${thumbHTML}
-            <div class="popup-row"><span class="popup-key">Huecos</span><span class="popup-val">${registro.detecciones.length}</span></div>
-            <div class="popup-row"><span class="popup-key">Confianza máx.</span><span class="popup-val">${(registro.maxConf * 100).toFixed(1)}%</span></div>
-            <div class="popup-row"><span class="popup-key">Fecha</span><span class="popup-val">${registro.fecha}</span></div>
-            ${rows}
-            <div class="popup-coords">${registro.gps ? `${registro.gps.lat.toFixed(6)}, ${registro.gps.lng.toFixed(6)}` : 'Sin GPS'}</div>`;
-    }
-
-    // ── AL CARGAR EL DOCUMENTO ──────────────────────────────────────
-    document.addEventListener('DOMContentLoaded', () => {
-        verificarSesion();
-    });
-</script>
-
+                <div class="popup-title">Telemetría ICTINO</div>
+                ${thumbHTML}
+                <div class="popup-row"><span class="popup-key">Objetos Detectados</span><span class="popup-val">${registro.detecciones.length}</span></div>
+                <div class="popup-row" style="margin-bottom: 10px;"><span class="popup-key">Confianza Máx.</span><span class="popup-val">${(registro.maxConf * 100).toFixed(1)}%</span></div>
+                ${rows}
+                <div class="popup-coords">${registro.gps ? `${registro.gps.lat.toFixed(6)}, ${registro.gps.lng.toFixed(6)}` : 'Sin Coordenadas'}</div>`;
+        }
+    </script>
 </body>
 </html>
