@@ -233,12 +233,14 @@ def delete_record():
         return jsonify({"error": "Error interno"}), 500
 
 
-# ── CONTROL DE ARRANQUE E INICIALIZACIÓN (Corrección Problema 3) ──
+# ── CONTROL DE ARRANQUE E INICIALIZACIÓN ──
 
-# Solución Problema 3: Uso estricto de app_context() para crear las tablas antes de levantar el puerto
 with app.app_context():
     db.create_all()
 
 if __name__ == '__main__':
-    # Configuración limpia lista para despliegue
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    # Lee el puerto dinámico de Render, si no existe (local), usa el 5000
+    port = int(os.environ.get('PORT', 5000))
+    
+    # En producción, debug debe ser False para evitar vulnerabilidades
+    app.run(host="0.0.0.0", port=port, debug=False)

@@ -613,6 +613,69 @@
         const canvas = document.getElementById('detectionCanvas');
         const ctx    = canvas.getContext('2d');
         const maxW   = canvas.parentElement.clientWidth || 640;
+        
+        // 1. Calculamos la escala de visualización de la imagen
+        const scale  = Math.min(1, maxW / img.naturalWidth);
+
+        // 2. Definimos el tamaño del lienzo en el navegador
+        canvas.width  = img.naturalWidth  * scale;
+        canvas.height = img.naturalHeight * scale;
+        
+        // 3. Dibujamos la imagen de fondo adaptada
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        detections.forEach((det, i) => {
+            // --- AQUÍ ESTÁ LA CORRECCIÓN ---
+            // Si tu backend devuelve las coordenadas normalizadas (entre 0 y 1):
+            let [x1, y1, x2, y2] = det.box;
+            
+            // Si los valores son menores o iguales a 1, significa que son porcentajes.
+            // Los multiplicamos por el ancho y alto ACTUAL del canvas para que encajen perfectos.
+            if (x1 <= 1 && x2 <= 1 && y1 <= 1 && y2 <= 1) {
+                x1 *= canvas.width;
+                x2 *= canvas.width;
+                y1 *= canvas.height;
+                y2 *= canvas.height;
+            } else {
+                // Si el backend ya mandaba píxeles absolutos de la imagen original, 
+                // solo hacía falta multiplicarlos por la escala actual del lienzo:
+                x1 *= scale;
+                x2 *= scale;
+                y1 *= scale;
+                y2 *= scale;
+            }
+            // ------------------------------
+
+            const c     = det.confidence;
+            const color = confColor(c);
+
+            ctx.shadowColor = color;
+            ctx.shadowBlur  = 14;
+            ctx.strokeStyle = color;
+            ctx.lineWidth   = 2;
+            ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+            ctx.shadowBlur  = 0;
+
+            const label = `#${i + 1}  ${(c * 100).toFixed(1)}%`;
+            const fSize = 12;
+            ctx.font    = `${fSize}px "DM Mono", monospace`;
+            const tw    = ctx.measureText(label).width;
+            const lh    = fSize + 8;
+
+            ctx.fillStyle = c >= 0.6
+                ? 'rgba(106,173,106,0.88)'
+                : c >= 0.35
+                    ? 'rgba(107,26,42,0.88)'
+                    : 'rgba(192,57,43,0.88)';
+            ctx.fillRect(x1, y1 - lh, tw + 12, lh);
+
+            ctx.fillStyle = '#F5EFE8';
+            ctx.fillText(label, x1 + 6, y1 - 5);
+        });
+    }
+        const canvas = document.getElementById('detectionCanvas');
+        const ctx    = canvas.getContext('2d');
+        const maxW   = canvas.parentElement.clientWidth || 640;
         const scale  = Math.min(1, maxW / img.naturalWidth);
 
         canvas.width  = img.naturalWidth  * scale;
