@@ -177,6 +177,15 @@ def detect():
 
         inp        = preprocess(img)
         outputs    = session.run(None, {INPUT_NAME: inp})
+        
+        print("=== ONNX OUTPUT DEBUG ===")
+        print(f"Type outputs: {type(outputs)}")
+        print(f"Len outputs: {len(outputs)}")
+        print(f"outputs[0] shape: {outputs[0].shape}")
+        print(f"outputs[0] min: {outputs[0].min()}, max: {outputs[0].max()}")
+        print(f"outputs[0] primeros 5 valores: {outputs[0].flat[:5]}")
+        print("========================")
+
         detections = postprocess(outputs, orig_w, orig_h)
 
         # Guardar resumen en BD si hay sesión activa
